@@ -2,8 +2,8 @@ package cmpt276.as3.mineseeker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -13,13 +13,14 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_activity);
 
-        Log.e("OrientationDemo", "Running onCreate()!");
+        continueToMainButton();
     }
 
     void continueToMainButton() {
         Button btn = findViewById(R.id.welcome_button);
         btn.setOnClickListener(v -> {
-            //Intent launch
+            Intent launchMainMenu = MainMenuActivity.makeIntent(WelcomeActivity.this);
+            startActivity(launchMainMenu);
         });
     }
 }

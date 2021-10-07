@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Mine Seeker</string>
+    <string name="title_text">Mine Seeker</string>
+    <string name="name_text">Kevin Chen, Joshua Li</string>
 </resources>

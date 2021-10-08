@@ -2,4 +2,25 @@
     <string name="app_name">Mine Seeker</string>
     <string name="title_text">Mine Seeker</string>
     <string name="name_text">Kevin Chen, Joshua Li</string>
+    <string name="playBtn">PLAY</string>
+    <string name="optionsBtn">OPTIONS</string>
+    <string name="helpBtn">HELP</string>
+    <string name="optionTitle">Options</string>
+    <string name="board_size">Board Size</string>
+    <string name="num_mines"># Mines</string>
+    <string name="helpTitle">Help</string>
+    <string name="helpText">https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home\nGame information here</string>
+    <string-array name="board_sizes">
+        <item>4 x 6</item>
+        <item>5 x 10</item>
+        <item>6 x 15</item>
+    </string-array>
+
+    <string-array name="num_mines">
+        <item>6 mines</item>
+        <item>10 mines</item>
+        <item>15 mines</item>
+        <item>20 mines</item>
+    </string-array>
+
 </resources>

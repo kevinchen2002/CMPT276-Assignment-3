@@ -15,6 +15,8 @@ public class MainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.main_menu_activity);
 
         continueToGameButton();
+        continueToOptionsButton();
+        continueToHelpButton();
     }
 
     void continueToGameButton() {
@@ -22,6 +24,22 @@ public class MainMenuActivity extends AppCompatActivity {
         btn.setOnClickListener(v -> {
             Intent launchGame = GameActivity.makeIntent(MainMenuActivity.this);
             startActivity(launchGame);
+        });
+    }
+
+    void continueToOptionsButton() {
+        Button btn = findViewById(R.id.main_to_options_btn);
+        btn.setOnClickListener(v -> {
+            Intent launchOptions = OptionsActivity.makeIntent(MainMenuActivity.this);
+            startActivity(launchOptions);
+        });
+    }
+
+    void continueToHelpButton() {
+        Button btn = findViewById(R.id.main_to_help_btn);
+        btn.setOnClickListener(v -> {
+            Intent launchHelp = HelpActivity.makeIntent(MainMenuActivity.this);
+            startActivity(launchHelp);
         });
     }
 

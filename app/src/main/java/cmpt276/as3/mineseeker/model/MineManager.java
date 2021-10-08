@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 public class MineManager {
+    //TODO: change these two grid into one
     Boolean[][] mineCoordinates;
     Boolean[][] hasBeenTapped;
     private final int NUM_ROWS;
@@ -54,11 +55,13 @@ public class MineManager {
 
     private void plantMines() {
         Random rand = new Random();
-        for (int i = 0; i < NUM_MINES; i++) {
+        int i = 0;
+        while (i < NUM_MINES) {
             int randRow = rand.nextInt(NUM_ROWS);
             int randCol = rand.nextInt(NUM_COLUMNS);
             if (!mineCoordinates[randRow][randCol]) {
                 mineCoordinates[randRow][randCol] = true;
+                i++;
             }
         }
     }

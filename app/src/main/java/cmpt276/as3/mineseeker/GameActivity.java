@@ -2,6 +2,7 @@ package cmpt276.as3.mineseeker;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,21 +19,80 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import cmpt276.as3.mineseeker.model.MineManager;
 
-public class GameActivity extends AppCompatActivity {
 
-    private final int NUM_ROWS = 5;
-    private final int NUM_COLUMNS = 7;
+public class GameActivity extends AppCompatActivity {
+    SharedPreferences sp;
+
+    private final int DEFAULT_ROWS = 5;
+    private final int DEFAULT_COLUMNS = 7;
+    private final int DEFAULT_MINES = 3;
+
+    private int NUM_ROWS;
+    private int NUM_COLUMNS;
+    private int NUM_MINES;
 
     //TODO: convert to singleton model
-    private MineManager gameMineManager = new MineManager(NUM_ROWS, NUM_COLUMNS, 3);
+    private MineManager gameMineManager;
 
-    Button[][] buttons = new Button[NUM_ROWS][NUM_COLUMNS];
+    private Button[][] buttons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sp = getSharedPreferences("MineSeeker", Context.MODE_PRIVATE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_activity);
+        initializeMines();
         populateMines();
+
+
+
+    }
+
+    private void initializeMines() {
+        int boardSize = sp.getInt("boardSizeChoice", -1);
+        int mines = sp.getInt("numMinesChoice", -1);
+
+        //TODO: make new elegant
+        switch (boardSize) {
+            case(0):
+                NUM_ROWS = 4;
+                NUM_COLUMNS = 6;
+                break;
+            case (1):
+                NUM_ROWS = 5;
+                NUM_COLUMNS = 10;
+                break;
+            case(2):
+                NUM_ROWS = 6;
+                NUM_COLUMNS = 15;
+                break;
+            default:
+                NUM_ROWS = DEFAULT_ROWS;
+                NUM_COLUMNS = DEFAULT_COLUMNS;
+        }
+
+        switch (mines) {
+            case(0):
+                NUM_MINES = 6;
+                break;
+            case(1):
+                NUM_MINES = 10;
+                break;
+            case(2):
+                NUM_MINES = 15;
+                break;
+            case(3):
+                NUM_MINES = 20;
+                break;
+            default:
+                NUM_MINES = DEFAULT_MINES;
+        }
+
+        gameMineManager = new MineManager(NUM_ROWS, NUM_COLUMNS, NUM_MINES);
+
+
+        buttons = new Button[NUM_ROWS][NUM_COLUMNS];
+
     }
 
     private void populateMines() {

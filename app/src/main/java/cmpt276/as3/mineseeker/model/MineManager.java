@@ -4,9 +4,11 @@ package cmpt276.as3.mineseeker.model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class MineManager {
     Boolean[][] mineCoordinates;
+    Boolean[][] hasBeenTapped;
     private final int NUM_ROWS;
     private final int NUM_COLUMNS;
     private final int NUM_MINES;
@@ -21,14 +23,14 @@ public class MineManager {
         observers.add(obs);
     }
 
-    private void notifyMineScan() {
+    private void updateNearbyMines() {
         for (MineScanObserver obs : observers) {
-            obs.notifyMineScan();
+            obs.scanForMines();
         }
     }
 
     public interface MineScanObserver {
-        void notifyMineScan();
+        void scanForMines();
     }
 
     public MineManager(int rows, int columns, int mines) {
@@ -36,28 +38,32 @@ public class MineManager {
         NUM_COLUMNS = columns;
         NUM_MINES = mines;
         mineCoordinates = new Boolean[NUM_ROWS][NUM_COLUMNS];
+        hasBeenTapped = new Boolean[NUM_ROWS][NUM_COLUMNS];
         minesFound = 0;
         minesChecked = 0;
         for (Boolean[] row : mineCoordinates) {
+            Arrays.fill(row, false);
+        }
+        for (Boolean[] row : hasBeenTapped) {
             Arrays.fill(row, false);
         }
 
         plantMines();
     }
 
-//    public static MineManager getInstance() {
-//        if (instance == null) {
-//            instance = new MineManager();
-//        }
-//        return instance;
-//    }
 
     private void plantMines() {
-        //TODO: randomly choose value in the array to set to true
-        mineCoordinates[1][1] = true;
+        Random rand = new Random();
+        for (int i = 0; i < NUM_MINES; i++) {
+            int randRow = rand.nextInt(NUM_ROWS);
+            int randCol = rand.nextInt(NUM_COLUMNS);
+            if (!mineCoordinates[randRow][randCol]) {
+                mineCoordinates[randRow][randCol] = true;
+            }
+        }
     }
 
-    public int checkMine(int x, int y) {
+    public int checkMineAt(int x, int y) {
         if (mineCoordinates[x][y]) {
             minesFound++;
             mineCoordinates[x][y] = false;
@@ -65,14 +71,15 @@ public class MineManager {
             if (minesFound == NUM_MINES) {
                 System.out.println("You did it!");
             }
+            updateNearbyMines();
         } else {
-            return getMineCount(x, y);
+            hasBeenTapped[x][y] = true;
+            return getNearbyMines(x, y);
         }
-
         return -1;
     }
 
-    public int getMineCount(int x, int y) {
+    public int getNearbyMines(int x, int y) {
         int foundMines = 0;
 
         for (int row = 0; row < NUM_ROWS; row++) {
@@ -80,14 +87,18 @@ public class MineManager {
                 foundMines++;
             }
         }
-
         for (int col = 0; col < NUM_COLUMNS; col++) {
             if (mineCoordinates[x][col]) {
                 foundMines++;
             }
         }
 
-        return foundMines;
+        if (hasBeenTapped[x][y]) {
+            return foundMines;
+        } else {
+            //returns negative 1 if it hasn't been tapped and shouldn't update
+            return -1;
+        }
     }
 
 }

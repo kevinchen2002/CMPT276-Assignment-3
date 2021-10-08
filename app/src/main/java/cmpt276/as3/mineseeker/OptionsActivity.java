@@ -22,6 +22,7 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.options_activity);
+        sp = getSharedPreferences("MineSeeker", Context.MODE_PRIVATE);
 
         boardSizeSpinner();
         numMinesSpinner();
@@ -69,7 +70,7 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
             Log.d("MINES", "picked " + choice);
             editor.putInt("numMinesChoice", choice);
         }
-        editor.commit();
+        editor.apply();
     }
 
     @Override

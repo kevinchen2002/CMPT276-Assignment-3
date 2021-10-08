@@ -17,10 +17,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Vector;
 
+import cmpt276.as3.mineseeker.model.MineManager;
+
 public class GameActivity extends AppCompatActivity {
 
     private final int NUM_ROWS = 5;
     private final int NUM_COLUMNS = 7;
+
+    //TOOD: convert to singleton model
+    private MineManager gameMineManager = new MineManager(NUM_ROWS, NUM_COLUMNS, 3);
 
     Button[][] buttons = new Button[NUM_ROWS][NUM_COLUMNS];
 
@@ -60,27 +65,43 @@ public class GameActivity extends AppCompatActivity {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //this is where the action happens
-                        gridButtonClicked(FINAL_ROW, FINAL_COL);
+
+                        int result = gameMineManager.checkMine(FINAL_ROW, FINAL_COL);
+                        if (result == -1) {
+                            //this is where the action happens
+                            gridButtonClicked(FINAL_ROW, FINAL_COL);
+                        } else {
+                            button.setText("" + result);
+                        }
                     }
                 });
-                
+
+                MineManager.MineScanObserver obs = new MineManager.MineScanObserver() {
+                    @Override
+                    public void notifyMineScan() {
+                        //TOOD: this doesn't work as expected, needs to update all buttons when this happens
+                        button.setText("" + gameMineManager.getMineCount(FINAL_ROW, FINAL_COL));
+                    }
+                };
+
                 tableRow.addView(button);
                 buttons[row][col] = button;
             }
         }
     }
 
+
     private void gridButtonClicked(int x, int y) {
         Toast.makeText(this, "You clicked the button " + x + ", " + y, Toast.LENGTH_LONG).show();
         Button button = buttons[x][y];
 
+        lockButtonSize();
         scaleImageToButton(button, R.drawable.coolguy);
     }
 
     private void scaleImageToButton (Button button, int imageID) {
+
         //Lock button sizes
-        lockButtonSize();
 
         int newWidth = button.getWidth();
         int newHeight = button.getHeight();

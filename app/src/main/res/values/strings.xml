@@ -10,6 +10,7 @@
     <string name="num_mines"># Mines</string>
     <string name="helpTitle">Help</string>
     <string name="helpText">https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home\nGame information here</string>
+    <string name="start_btn">START</string>
     <string-array name="board_sizes">
         <item>4 x 6</item>
         <item>5 x 10</item>

@@ -1,5 +1,6 @@
 package cmpt276.as3.mineseeker;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,11 +9,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,12 +42,14 @@ public class GameActivity extends AppCompatActivity {
         sp = getSharedPreferences("MineSeeker", Context.MODE_PRIVATE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_activity);
+        
         initializeMines();
+        updateMineCount();
+        updateScanCount();
         populateMines();
 
-
-
     }
+
 
     private void initializeMines() {
         int boardSize = sp.getInt("boardSizeChoice", -1);
@@ -89,14 +92,12 @@ public class GameActivity extends AppCompatActivity {
         }
 
         gameMineManager = new MineManager(NUM_ROWS, NUM_COLUMNS, NUM_MINES);
-
-
         buttons = new Button[NUM_ROWS][NUM_COLUMNS];
-
     }
 
+    @SuppressLint("SetTextI18n")
     private void populateMines() {
-        TableLayout table = (TableLayout) findViewById(R.id.mine_table);
+        TableLayout table = findViewById(R.id.mine_table);
         for (int row = 0; row < NUM_ROWS; row++) {
             TableRow tableRow = new TableRow(this);
             tableRow.setLayoutParams(new TableLayout.LayoutParams(
@@ -123,24 +124,22 @@ public class GameActivity extends AppCompatActivity {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-                        int result = gameMineManager.checkMineAt(FINAL_ROW, FINAL_COL);
-                        if (result == -1) {
-                            //this is where the action happens
-                            findMine(FINAL_ROW, FINAL_COL);
-                        } else {
-                            button.setText("" + result);
+                        if (gameMineManager.isTappedAt(FINAL_ROW, FINAL_COL)) {
+                            return;
                         }
+                        if (gameMineManager.isMineAt(FINAL_ROW, FINAL_COL)) {
+                            revealMine(FINAL_ROW, FINAL_COL);
+                        } else {
+                            scanMinesAt(FINAL_ROW, FINAL_COL);
+                        }
+                        updateScanCount();
                     }
                 });
 
                 MineManager.MineScanObserver obs = new MineManager.MineScanObserver() {
                     @Override
-                    public void scanForMines() {
-                        int result = gameMineManager.getNearbyMines(FINAL_ROW, FINAL_COL);
-                        if (result != -1) {
-                            button.setText("" + result);
-                        }
+                    public void gotCallBack() {
+                        scanMinesAt(FINAL_ROW, FINAL_COL);
                     }
                 };
                 gameMineManager.registerChangeCallBack(obs);
@@ -151,12 +150,34 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    private void findMine(int x, int y) {
+    @SuppressLint("SetTextI18n")
+    private void scanMinesAt(int x, int y) {
+        if (gameMineManager.isTappedAt(x, y)) {
+            buttons[x][y].setText("" + gameMineManager.getNearbyMines(x, y));
+        }
+    }
+
+    private void revealMine(int x, int y) {
+        updateMineCount();
         Toast.makeText(this, "You clicked the button " + x + ", " + y, Toast.LENGTH_LONG).show();
         Button button = buttons[x][y];
-
         lockButtonSize();
         scaleImageToButton(button, R.drawable.coolguy);
+    }
+
+    @SuppressLint("DefaultLocale")
+    public void updateScanCount() {
+        TextView scanCount = findViewById(R.id.showScansUsed);
+        scanCount.setText(String.format("# Scans Used: %d",
+                gameMineManager.getMinesChecked()));
+    }
+
+    @SuppressLint("DefaultLocale")
+    public void updateMineCount() {
+        TextView mineCount = findViewById(R.id.showMinesFound);
+        mineCount.setText(String.format("Found %d of %d mines",
+                gameMineManager.getMinesFound(),
+                gameMineManager.getNumMines()));
     }
 
     private void scaleImageToButton (Button button, int imageID) {

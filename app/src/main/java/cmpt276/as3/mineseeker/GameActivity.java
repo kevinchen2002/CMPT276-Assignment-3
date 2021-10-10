@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import cmpt276.as3.mineseeker.model.GameData;
 import cmpt276.as3.mineseeker.model.MineManager;
@@ -61,7 +62,6 @@ public class GameActivity extends AppCompatActivity {
         populateMines();
 
     }
-
 
     private void initializeMines() {
         int boardSize = sp.getInt("boardSizeChoice", -1);
@@ -186,15 +186,17 @@ public class GameActivity extends AppCompatActivity {
             mineFeedback.vibrate(VibrationEffect.createOneShot(((long) (mineCount + 1) * EMPTY_VIBE_MULTIPLIER),
                                                                  EMPTY_VIBE_TIME));
         }
-
     }
 
     private void revealMine(int x, int y) {
-        updateMineCount();
-        Toast.makeText(this, "You clicked the button " + x + ", " + y, Toast.LENGTH_LONG).show();
         Button button = buttons[x][y];
+        updateMineCount();
         lockButtonSize();
         scaleImageToButton(button, R.drawable.coolguy);
+
+        if (gameMineManager.isGameWon()) {
+            winGame();
+        }
     }
 
     @SuppressLint("DefaultLocale")
@@ -235,6 +237,18 @@ public class GameActivity extends AppCompatActivity {
                 button.setMaxHeight(height);
             }
         }
+    }
+
+    private void winGame() {
+        FragmentManager manager = getSupportFragmentManager();
+        WinMessageFragment winnerMessage = new WinMessageFragment();
+        winnerMessage.show(manager, "You did it!");
+    }
+
+    @Override
+    public void finish() {
+        //TOOD: save game results
+        super.finish();
     }
 
     public static Intent makeIntent(Context context) {

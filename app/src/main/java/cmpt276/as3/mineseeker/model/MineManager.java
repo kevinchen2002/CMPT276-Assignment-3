@@ -31,9 +31,9 @@ public class MineManager {
     }
 
     public interface MineScanObserver {
-
         void gotCallBack();
     }
+
     public MineManager(int rows, int columns, int mines) {
         NUM_ROWS = rows;
         NUM_COLUMNS = columns;
@@ -50,7 +50,6 @@ public class MineManager {
 
         plantMines();
     }
-
 
     private void plantMines() {
         Random rand = new Random();
@@ -115,5 +114,9 @@ public class MineManager {
 
     public int getMinesFound() {
         return minesFound;
+    }
+
+    public boolean isGameWon() {
+        return minesFound == NUM_MINES;
     }
 }

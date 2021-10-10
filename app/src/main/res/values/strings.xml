@@ -16,6 +16,7 @@
     <string name="mineNumText">TextView</string>
     <string name="highScoreText">TextView</string>
     <string name="resetBtn">RESET DATA</string>
+    <string name="bestScoreView">TextView</string>
     <string-array name="board_sizes">
         <item>4 x 6</item>
         <item>5 x 10</item>

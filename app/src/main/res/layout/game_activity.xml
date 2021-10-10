@@ -39,4 +39,15 @@
         android:text=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/gameBestScoreView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:text="@string/bestScoreView"
+        app:layout_constraintBottom_toTopOf="@+id/mine_table"
+        app:layout_constraintEnd_toStartOf="@+id/showScansUsed"
+        app:layout_constraintStart_toEndOf="@+id/showMinesFound"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

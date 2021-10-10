@@ -1,5 +1,7 @@
 package cmpt276.as3.mineseeker.model;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class GameData {
@@ -30,6 +32,9 @@ public class GameData {
 
     public void clearGames() {
         gamesPlayed = 0;
+        for (int i = 0; i < BOARD_CONFIGS*MINE_CONFIGS; i++) {
+            highScores.set(i, 1000);
+        }
     }
 
     public int getGamesPlayed() {
@@ -49,6 +54,10 @@ public class GameData {
 
     public int getHighScore (int boardOption, int mineOption) {
         int index = MINE_CONFIGS*boardOption + mineOption;
+        return highScores.get(index);
+    }
+
+    public int getHighScore (int index) {
         return highScores.get(index);
     }
 

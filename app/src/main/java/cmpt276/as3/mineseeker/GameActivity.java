@@ -21,6 +21,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.w3c.dom.Text;
+
 import cmpt276.as3.mineseeker.model.GameData;
 import cmpt276.as3.mineseeker.model.MineManager;
 
@@ -51,15 +53,12 @@ public class GameActivity extends AppCompatActivity {
         sp = getSharedPreferences("MineSeeker", Context.MODE_PRIVATE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_activity);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         gameData.startGame();
-        Log.d("start", "games played = "+gameData.getGamesPlayed());
         initializeMines();
         updateMineCount();
         updateScanCount();
         populateMines();
-
     }
 
 
@@ -106,6 +105,8 @@ public class GameActivity extends AppCompatActivity {
 
         gameMineManager = new MineManager(NUM_ROWS, NUM_COLUMNS, numberOfMines);
         buttons = new Button[NUM_ROWS][NUM_COLUMNS];
+
+        showBestScore(boardSize, mines);
     }
 
     @SuppressLint("SetTextI18n")
@@ -195,6 +196,11 @@ public class GameActivity extends AppCompatActivity {
         Button button = buttons[x][y];
         lockButtonSize();
         scaleImageToButton(button, R.drawable.coolguy);
+    }
+
+    void showBestScore(int boardOption, int mineOption) {
+        TextView bestScoreView = findViewById(R.id.gameBestScoreView);
+        bestScoreView.setText("Best score: " + gameData.getHighScore(boardOption, mineOption));
     }
 
     @SuppressLint("DefaultLocale")

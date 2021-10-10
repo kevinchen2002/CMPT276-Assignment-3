@@ -1,10 +1,13 @@
 package cmpt276.as3.mineseeker;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,6 +40,55 @@ public class MainMenuActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         saveGame();
+        updateText();
+    }
+
+    //@SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n")
+    void updateText() {
+
+        TextView gamesPlayedView = findViewById(R.id.gamesPlayedView);
+        Log.d("update", "games played = "+gameData.getGamesPlayed());
+        gamesPlayedView.setText("Games played: " + gameData.getGamesPlayed());
+
+        int boardSize = sp.getInt("boardSizeChoice", -1);
+        int mines = sp.getInt("numMinesChoice", -1);
+        TextView boardConfigView = findViewById(R.id.boardConfigView);
+        TextView mineNumView = findViewById(R.id.mineNumView);
+
+        switch (boardSize) {
+            case(0):
+                boardConfigView.setText("Board size: 4 x 6");
+                break;
+            case (1):
+                boardConfigView.setText("Board size: 5 x 10");
+                break;
+            case(2):
+                boardConfigView.setText("Board size: 6 x 15");
+                break;
+            default:
+                boardConfigView.setText("Board size: 5 x 7");
+        }
+
+        switch (mines) {
+            case(0):
+                mineNumView.setText("Mine count: 6");
+                break;
+            case(1):
+                mineNumView.setText("Mine count: 10");
+                break;
+            case(2):
+                mineNumView.setText("Mine count: 15");
+                break;
+            case(3):
+                mineNumView.setText("Mine count: 20");
+                break;
+            default:
+                mineNumView.setText("Mine count: 3");
+        }
+
+        TextView highScoreView = findViewById(R.id.highScoreView);
+        highScoreView.setText("Best score for this configuration: "+gameData.getHighScore(boardSize, mines));
     }
 
     void continueToGameButton() {
@@ -71,6 +123,7 @@ public class MainMenuActivity extends AppCompatActivity {
         editor.putString("MineSeeker highscores", jsonHighScores);
 
         int gamesPlayed = gameData.getGamesPlayed();
+        Log.d("save", "games played = "+gamesPlayed);
         editor.putInt("MineSeeker games played", gamesPlayed);
 
         editor.apply();
@@ -85,8 +138,11 @@ public class MainMenuActivity extends AppCompatActivity {
             gameData.setHighScores(myGson.fromJson(jsonHighScores, listType));
         }
 
-        int gamesPlayed =sp.getInt("MineSeeker games played", 0);
-        gameData.setGamesPlayed(gamesPlayed);
+        int gamesPlayed = sp.getInt("MineSeeker games played", 0);
+        //if (gamesPlayed != 0) {
+            Log.d("load", "games played = "+gamesPlayed);
+            gameData.setGamesPlayed(gamesPlayed);
+        //}
     }
 
     public static Intent makeIntent(Context context) {

@@ -11,6 +11,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -20,11 +21,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import cmpt276.as3.mineseeker.model.GameData;
 import cmpt276.as3.mineseeker.model.MineManager;
 
 
 public class GameActivity extends AppCompatActivity {
     SharedPreferences sp;
+    private final GameData gameData = GameData.getInstance();
 
     private final int DEFAULT_ROWS = 5;
     private final int DEFAULT_COLUMNS = 7;
@@ -48,7 +51,10 @@ public class GameActivity extends AppCompatActivity {
         sp = getSharedPreferences("MineSeeker", Context.MODE_PRIVATE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_activity);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
+        gameData.startGame();
+        Log.d("start", "games played = "+gameData.getGamesPlayed());
         initializeMines();
         updateMineCount();
         updateScanCount();

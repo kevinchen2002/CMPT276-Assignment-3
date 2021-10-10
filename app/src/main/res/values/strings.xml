@@ -11,6 +11,11 @@
     <string name="helpTitle">Help</string>
     <string name="helpText"><a href="https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home">Assignment description</a>\nGame information here</string>
     <string name="start_btn">START</string>
+    <string name="gamesPlayedText">TextView</string>
+    <string name="boardConfigText">TextView</string>
+    <string name="mineNumText">TextView</string>
+    <string name="highScoreText">TextView</string>
+    <string name="resetBtn">RESET DATA</string>
     <string-array name="board_sizes">
         <item>4 x 6</item>
         <item>5 x 10</item>

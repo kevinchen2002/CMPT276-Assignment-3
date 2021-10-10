@@ -9,6 +9,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -28,9 +30,13 @@ public class GameActivity extends AppCompatActivity {
     private final int DEFAULT_COLUMNS = 7;
     private final int DEFAULT_MINES = 3;
 
+    private final int MINE_VIBE_AMPLITUDE = 255;
+    private final int MINE_VIBE_TIME_MS = 25;
+    private final int EMPTY_VIBE_MULTIPLIER = 3;
+    private final int EMPTY_VIBE_TIME = 127;
+
     private int NUM_ROWS;
     private int NUM_COLUMNS;
-    private int NUM_MINES;
 
     //TODO: convert to singleton model
     private MineManager gameMineManager;
@@ -42,7 +48,7 @@ public class GameActivity extends AppCompatActivity {
         sp = getSharedPreferences("MineSeeker", Context.MODE_PRIVATE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_activity);
-        
+
         initializeMines();
         updateMineCount();
         updateScanCount();
@@ -74,24 +80,25 @@ public class GameActivity extends AppCompatActivity {
                 NUM_COLUMNS = DEFAULT_COLUMNS;
         }
 
+        int numberOfMines;
         switch (mines) {
             case(0):
-                NUM_MINES = 6;
+                numberOfMines = 6;
                 break;
             case(1):
-                NUM_MINES = 10;
+                numberOfMines = 10;
                 break;
             case(2):
-                NUM_MINES = 15;
+                numberOfMines = 15;
                 break;
             case(3):
-                NUM_MINES = 20;
+                numberOfMines = 20;
                 break;
             default:
-                NUM_MINES = DEFAULT_MINES;
+                numberOfMines = DEFAULT_MINES;
         }
 
-        gameMineManager = new MineManager(NUM_ROWS, NUM_COLUMNS, NUM_MINES);
+        gameMineManager = new MineManager(NUM_ROWS, NUM_COLUMNS, numberOfMines);
         buttons = new Button[NUM_ROWS][NUM_COLUMNS];
     }
 
@@ -124,13 +131,15 @@ public class GameActivity extends AppCompatActivity {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
                         if (gameMineManager.isTappedAt(FINAL_ROW, FINAL_COL)) {
                             return;
                         }
+                        vibrateByCell(FINAL_ROW, FINAL_COL);
                         if (gameMineManager.isMineAt(FINAL_ROW, FINAL_COL)) {
                             revealMine(FINAL_ROW, FINAL_COL);
                         } else {
-                            scanMinesAt(FINAL_ROW, FINAL_COL);
+                            scanMineAt(FINAL_ROW, FINAL_COL);
                         }
                         updateScanCount();
                     }
@@ -139,7 +148,7 @@ public class GameActivity extends AppCompatActivity {
                 MineManager.MineScanObserver obs = new MineManager.MineScanObserver() {
                     @Override
                     public void gotCallBack() {
-                        scanMinesAt(FINAL_ROW, FINAL_COL);
+                        scanMineAt(FINAL_ROW, FINAL_COL);
                     }
                 };
                 gameMineManager.registerChangeCallBack(obs);
@@ -151,10 +160,27 @@ public class GameActivity extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    private void scanMinesAt(int x, int y) {
+    private void scanMineAt(int x, int y) {
         if (gameMineManager.isTappedAt(x, y)) {
-            buttons[x][y].setText("" + gameMineManager.getNearbyMines(x, y));
+            int mineCount = gameMineManager.getNearbyMines(x, y);
+            buttons[x][y].setText("" + mineCount);
         }
+    }
+
+    private void vibrateByCell(int x, int y) {
+        //TODO: convert into constants or local variables? As Brian which to do
+        Vibrator mineFeedback = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (gameMineManager.checkMineAt(x, y)) {
+            mineFeedback.vibrate(VibrationEffect.createOneShot(MINE_VIBE_AMPLITUDE,
+                                                                MINE_VIBE_TIME_MS));
+        } else {
+            int mineCount = gameMineManager.getNearbyMines(x, y);
+
+
+            mineFeedback.vibrate(VibrationEffect.createOneShot(((long) (mineCount + 1) * EMPTY_VIBE_MULTIPLIER),
+                                                                 EMPTY_VIBE_TIME));
+        }
+
     }
 
     private void revealMine(int x, int y) {

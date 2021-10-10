@@ -67,19 +67,21 @@ public class MineManager {
 
     public boolean isMineAt(int x, int y) {
         CellInfo currentCell = mineCoordinates[x][y];
-        minesChecked++;
         if (currentCell.hasMine()) {
             minesFound++;
             currentCell.disableMine();
-
-
             refreshScreen();
             return true;
         }
 
 
+        minesChecked++;
         currentCell.setTappedTrue();
         return false;
+    }
+
+    public boolean checkMineAt(int x, int y) {
+        return mineCoordinates[x][y].hasMine();
     }
 
     public boolean isTappedAt(int x, int y) {

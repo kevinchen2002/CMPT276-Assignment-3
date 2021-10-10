@@ -8,14 +8,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import cmpt276.as3.mineseeker.model.GameData;
 
 /**
  * Learned basic spinner functionality from https://www.tutorialspoint.com/android/android_spinner_control.htm
  */
 public class OptionsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    private final GameData gameData = GameData.getInstance();
     SharedPreferences sp;
 
     @Override
@@ -24,8 +29,21 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
         setContentView(R.layout.options_activity);
         sp = getSharedPreferences("MineSeeker", Context.MODE_PRIVATE);
 
+        resetDataButton();
         boardSizeSpinner();
         numMinesSpinner();
+    }
+
+    void resetDataButton() {
+        Button btn = findViewById(R.id.resetBtn);
+        btn.setOnClickListener(v -> {
+            gameData.clearGames();
+            gameData.setGamesPlayed(0);
+            Toast.makeText(getApplicationContext(),
+                    "All data cleared.", Toast.LENGTH_LONG).show();
+            Log.d("LOG", "it worked");
+            //TODO add a confirm fragment
+        });
     }
 
     public static Intent makeIntent(Context context) {

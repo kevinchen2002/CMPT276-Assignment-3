@@ -181,8 +181,6 @@ public class GameActivity extends AppCompatActivity {
                                                                 MINE_VIBE_TIME_MS));
         } else {
             int mineCount = gameMineManager.getNearbyMines(x, y);
-
-
             mineFeedback.vibrate(VibrationEffect.createOneShot(((long) (mineCount + 1) * EMPTY_VIBE_MULTIPLIER),
                                                                  EMPTY_VIBE_TIME));
         }
@@ -247,7 +245,13 @@ public class GameActivity extends AppCompatActivity {
 
     @Override
     public void finish() {
-        //TOOD: save game results
+        if (gameMineManager.isGameWon()) {
+            int boardSize = sp.getInt("boardSizeChoice", -1);
+            int mines = sp.getInt("numMinesChoice", -1);
+            GameData storeResults = GameData.getInstance();
+            storeResults.setHighScore(boardSize, mines, gameMineManager.getMinesChecked());
+        }
+
         super.finish();
     }
 

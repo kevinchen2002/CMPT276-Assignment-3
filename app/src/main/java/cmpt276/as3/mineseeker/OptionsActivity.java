@@ -1,5 +1,6 @@
 package cmpt276.as3.mineseeker;
 
+import android.app.VoiceInteractor;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,12 +16,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import cmpt276.as3.mineseeker.model.GameData;
+import cmpt276.as3.mineseeker.model.OptionsManager;
 
 /**
  * Learned basic spinner functionality from https://www.tutorialspoint.com/android/android_spinner_control.htm
  */
 public class OptionsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private final GameData gameData = GameData.getInstance();
+    private final OptionsManager options = OptionsManager.getInstance();
+
     SharedPreferences sp;
 
     @Override
@@ -28,6 +32,7 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.options_activity);
         sp = getSharedPreferences("MineSeeker", Context.MODE_PRIVATE);
+
 
         resetDataButton();
         boardSizeSpinner();
@@ -55,10 +60,12 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
      */
     void boardSizeSpinner() {
         Spinner boardSizeSpinner = findViewById(R.id.boardSizeDropDown);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.board_sizes,
-                android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter(this,
+                android.R.layout.simple_spinner_item, options.getStringDimensions());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         boardSizeSpinner.setAdapter(adapter);
+
+        boardSizeSpinner.setSelection(options.getCurrentBoardOption());
 
         boardSizeSpinner.setOnItemSelectedListener(this);
     }
@@ -68,10 +75,12 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
      */
     void numMinesSpinner() {
         Spinner numMinesSpinner = findViewById(R.id.numMinesDropDown);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.num_mines,
-                android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter(this,
+                android.R.layout.simple_spinner_item, options.getStringMines());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         numMinesSpinner.setAdapter(adapter);
+
+        numMinesSpinner.setSelection(options.getCurrentMineOption());
 
         numMinesSpinner.setOnItemSelectedListener(this);
     }
@@ -82,14 +91,17 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
         SharedPreferences.Editor editor = sp.edit();
         if (parent.getId() == R.id.boardSizeDropDown) {
             Log.d("BOARD", "picked " + choice);
-            editor.putInt("boardSizeChoice", choice);
+            options.setCurrentBoardOption(choice);
         }
         if (parent.getId() == R.id.numMinesDropDown) {
             Log.d("MINES", "picked " + choice);
-            editor.putInt("numMinesChoice", choice);
+
+
+            options.setCurrentMineOption(choice);
         }
         editor.apply();
     }
+
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {

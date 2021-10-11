@@ -11,30 +11,24 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import org.w3c.dom.Text;
-
 import cmpt276.as3.mineseeker.model.GameData;
 import cmpt276.as3.mineseeker.model.MineManager;
+import cmpt276.as3.mineseeker.model.OptionsManager;
 
 
 public class GameActivity extends AppCompatActivity {
-    SharedPreferences sp;
     private final GameData gameData = GameData.getInstance();
+    private final OptionsManager options = OptionsManager.getInstance();
 
-    private final int DEFAULT_ROWS = 5;
-    private final int DEFAULT_COLUMNS = 7;
-    private final int DEFAULT_MINES = 3;
+    SharedPreferences sp;
 
     private final int MINE_VIBE_AMPLITUDE = 255;
     private final int MINE_VIBE_TIME_MS = 25;
@@ -43,8 +37,8 @@ public class GameActivity extends AppCompatActivity {
 
     private int NUM_ROWS;
     private int NUM_COLUMNS;
+    private int NUM_MINES;
 
-    //TODO: convert to singleton model
     private MineManager gameMineManager;
 
     private Button[][] buttons;
@@ -56,57 +50,22 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.game_activity);
 
         gameData.startGame();
+        showBestScore();
         initializeMines();
         updateMineCount();
         updateScanCount();
         populateMines();
     }
 
+
     private void initializeMines() {
-        int boardSize = sp.getInt("boardSizeChoice", -1);
-        int mines = sp.getInt("numMinesChoice", -1);
+        NUM_ROWS = options.getRow();
+        NUM_COLUMNS = options.getCol();
 
-        //TODO: make new elegant
-        switch (boardSize) {
-            case(0):
-                NUM_ROWS = 4;
-                NUM_COLUMNS = 6;
-                break;
-            case (1):
-                NUM_ROWS = 5;
-                NUM_COLUMNS = 10;
-                break;
-            case(2):
-                NUM_ROWS = 6;
-                NUM_COLUMNS = 15;
-                break;
-            default:
-                NUM_ROWS = DEFAULT_ROWS;
-                NUM_COLUMNS = DEFAULT_COLUMNS;
-        }
+        NUM_MINES = options.getMine();
 
-        int numberOfMines;
-        switch (mines) {
-            case(0):
-                numberOfMines = 6;
-                break;
-            case(1):
-                numberOfMines = 10;
-                break;
-            case(2):
-                numberOfMines = 15;
-                break;
-            case(3):
-                numberOfMines = 20;
-                break;
-            default:
-                numberOfMines = DEFAULT_MINES;
-        }
-
-        gameMineManager = new MineManager(NUM_ROWS, NUM_COLUMNS, numberOfMines);
+        gameMineManager = new MineManager(NUM_ROWS, NUM_COLUMNS, NUM_MINES);
         buttons = new Button[NUM_ROWS][NUM_COLUMNS];
-
-        showBestScore(boardSize, mines);
     }
 
     @SuppressLint("SetTextI18n")
@@ -135,28 +94,21 @@ public class GameActivity extends AppCompatActivity {
                 //make clip on small buttons
                 button.setPadding(0,0,0,0);
 
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        if (gameMineManager.isTappedAt(FINAL_ROW, FINAL_COL)) {
-                            return;
-                        }
-                        vibrateByCell(FINAL_ROW, FINAL_COL);
-                        if (gameMineManager.isMineAt(FINAL_ROW, FINAL_COL)) {
-                            revealMine(FINAL_ROW, FINAL_COL);
-                        } else {
-                            scanMineAt(FINAL_ROW, FINAL_COL);
-                        }
-                        updateScanCount();
+                button.setOnClickListener(v -> {
+                    if (gameMineManager.isTappedAt(FINAL_ROW, FINAL_COL)) {
+                        return;
                     }
-                });
-
-                MineManager.MineScanObserver obs = new MineManager.MineScanObserver() {
-                    @Override
-                    public void gotCallBack() {
+                    vibrateByCell(FINAL_ROW, FINAL_COL);
+                    if (gameMineManager.isMineAt(FINAL_ROW, FINAL_COL)) {
+                        revealMine(FINAL_ROW, FINAL_COL);
+                    } else {
                         scanMineAt(FINAL_ROW, FINAL_COL);
                     }
+                    updateScanCount();
+                });
+
+                MineManager.MineScanObserver obs = () -> {
+                    scanMineAt(FINAL_ROW, FINAL_COL);
                 };
                 gameMineManager.registerChangeCallBack(obs);
 
@@ -182,8 +134,9 @@ public class GameActivity extends AppCompatActivity {
                                                                 MINE_VIBE_TIME_MS));
         } else {
             int mineCount = gameMineManager.getNearbyMines(x, y);
-            mineFeedback.vibrate(VibrationEffect.createOneShot(((long) (mineCount + 1) * EMPTY_VIBE_MULTIPLIER),
-                                                                 EMPTY_VIBE_TIME));
+            mineFeedback.vibrate(VibrationEffect.createOneShot(
+                    ((long) (mineCount + 1) * EMPTY_VIBE_MULTIPLIER),
+                    EMPTY_VIBE_TIME));
         }
     }
 
@@ -192,15 +145,19 @@ public class GameActivity extends AppCompatActivity {
         updateMineCount();
         lockButtonSize();
         scaleImageToButton(button, R.drawable.coolguy);
-
         if (gameMineManager.isGameWon()) {
             winGame();
         }
     }
 
-    void showBestScore(int boardOption, int mineOption) {
+    @SuppressLint("SetTextI18n")
+    void showBestScore() {
+        int boardOption = options.getCurrentBoardOption();
+        int mineOption = options.getCurrentMineOption();
         TextView bestScoreView = findViewById(R.id.gameBestScoreView);
-        bestScoreView.setText("Best score: " + gameData.getHighScore(boardOption, mineOption));
+        if (gameData.isThereScore(boardOption, mineOption)) {
+            bestScoreView.setText("Best score: " + gameData.getHighScore(boardOption, mineOption));
+        }
     }
 
     @SuppressLint("DefaultLocale")
@@ -252,8 +209,8 @@ public class GameActivity extends AppCompatActivity {
     @Override
     public void finish() {
         if (gameMineManager.isGameWon()) {
-            int boardSize = sp.getInt("boardSizeChoice", -1);
-            int mines = sp.getInt("numMinesChoice", -1);
+            int boardSize = options.getCurrentBoardOption();
+            int mines = options.getCurrentMineOption();
             GameData storeResults = GameData.getInstance();
             storeResults.setHighScore(boardSize, mines, gameMineManager.getMinesChecked());
         }

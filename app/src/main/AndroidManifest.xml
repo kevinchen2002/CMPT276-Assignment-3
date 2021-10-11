@@ -28,6 +28,7 @@
             android:name=".MainMenuActivity"
             android:parentActivityName=".WelcomeActivity"
             android:exported="true"
+            android:launchMode="singleTask"
             android:screenOrientation="landscape"/>
         <activity
             android:name=".WelcomeActivity"

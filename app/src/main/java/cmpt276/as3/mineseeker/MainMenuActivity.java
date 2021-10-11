@@ -23,6 +23,7 @@ import cmpt276.as3.mineseeker.model.GameData;
 public class MainMenuActivity extends AppCompatActivity {
     private final GameData gameData = GameData.getInstance();
     SharedPreferences sp;
+    private final int DEFAULT_BEST_SCORE = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
         sp = getSharedPreferences("MineSeeker", Context.MODE_PRIVATE);
         loadGame();
+        updateText();
         continueToGameButton();
         continueToOptionsButton();
         continueToHelpButton();
@@ -43,12 +45,10 @@ public class MainMenuActivity extends AppCompatActivity {
         updateText();
     }
 
-    //@SuppressLint("SetTextI18n")
     @SuppressLint("SetTextI18n")
     void updateText() {
 
         TextView gamesPlayedView = findViewById(R.id.gamesPlayedView);
-        Log.d("update", "games played = "+gameData.getGamesPlayed());
         gamesPlayedView.setText("Games played: " + gameData.getGamesPlayed());
 
         int boardSize = sp.getInt("boardSizeChoice", -1);
@@ -88,7 +88,12 @@ public class MainMenuActivity extends AppCompatActivity {
         }
 
         TextView highScoreView = findViewById(R.id.highScoreView);
-        highScoreView.setText("Best score for this configuration: "+gameData.getHighScore(boardSize, mines));
+        int highscore = gameData.getHighScore(boardSize, mines);
+        if (highscore != DEFAULT_BEST_SCORE) {
+            highScoreView.setText("Best score for this configuration: " + highscore);
+        } else {
+            highScoreView.setText("Best score for this configuration: [none]");
+        }
     }
 
     void continueToGameButton() {
@@ -123,7 +128,6 @@ public class MainMenuActivity extends AppCompatActivity {
         editor.putString("MineSeeker highscores", jsonHighScores);
 
         int gamesPlayed = gameData.getGamesPlayed();
-        Log.d("save", "games played = "+gamesPlayed);
         editor.putInt("MineSeeker games played", gamesPlayed);
 
         editor.apply();
@@ -133,16 +137,14 @@ public class MainMenuActivity extends AppCompatActivity {
         Gson myGson = new GsonBuilder().create();
 
         String jsonHighScores = sp.getString("MineSeeker highscores", "");
+        Log.d("JSON", jsonHighScores);
         if (!jsonHighScores.equals("")) {
             Type listType = new TypeToken<ArrayList<Integer>>() {}.getType();
             gameData.setHighScores(myGson.fromJson(jsonHighScores, listType));
         }
 
         int gamesPlayed = sp.getInt("MineSeeker games played", 0);
-        //if (gamesPlayed != 0) {
-            Log.d("load", "games played = "+gamesPlayed);
-            gameData.setGamesPlayed(gamesPlayed);
-        //}
+        gameData.setGamesPlayed(gamesPlayed);
     }
 
     public static Intent makeIntent(Context context) {

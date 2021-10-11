@@ -7,14 +7,17 @@ import java.util.ArrayList;
 public class GameData {
     private int gamesPlayed;
     private ArrayList<Integer> highScores = new ArrayList<>();
-    private final int BOARD_CONFIGS = 3;
-    private final int MINE_CONFIGS = 4;
+    private OptionsManager options = OptionsManager.getInstance();
+    private final int BOARD_CONFIGS = options.getTotalDimensions();
+    private final int MINE_CONFIGS = options.getTotalMineOptions();
 
     private static GameData instance;
 
+    private final int TOTAL_GAME_VERSIONS = BOARD_CONFIGS * MINE_CONFIGS;
+
     public GameData() {
-        for (int i = 0; i < BOARD_CONFIGS*MINE_CONFIGS; i++) {
-            highScores.add(1000);
+        for (int i = 0; i < TOTAL_GAME_VERSIONS; i++) {
+            highScores.add(null);
         }
         gamesPlayed = 0;
     }
@@ -32,8 +35,8 @@ public class GameData {
 
     public void clearGames() {
         gamesPlayed = 0;
-        for (int i = 0; i < BOARD_CONFIGS*MINE_CONFIGS; i++) {
-            highScores.set(i, 1000);
+        for (int i = 0; i < TOTAL_GAME_VERSIONS; i++) {
+            highScores.set(i, null);
         }
     }
 
@@ -67,5 +70,9 @@ public class GameData {
 
     public void setHighScores(ArrayList<Integer> highScores) {
         this.highScores = highScores;
+    }
+
+    public boolean isThereScore(int boardOption, int mineOption) {int index = MINE_CONFIGS*boardOption + mineOption;
+        return highScores.get(index) != null;
     }
 }

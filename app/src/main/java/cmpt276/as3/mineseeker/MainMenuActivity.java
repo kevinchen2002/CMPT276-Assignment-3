@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Path;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -19,11 +20,12 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import cmpt276.as3.mineseeker.model.GameData;
+import cmpt276.as3.mineseeker.model.OptionsManager;
 
 public class MainMenuActivity extends AppCompatActivity {
     private final GameData gameData = GameData.getInstance();
+    private final OptionsManager options = OptionsManager.getInstance();
     SharedPreferences sp;
-    private final int DEFAULT_BEST_SCORE = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,48 +53,22 @@ public class MainMenuActivity extends AppCompatActivity {
         TextView gamesPlayedView = findViewById(R.id.gamesPlayedView);
         gamesPlayedView.setText("Games played: " + gameData.getGamesPlayed());
 
-        int boardSize = sp.getInt("boardSizeChoice", -1);
-        int mines = sp.getInt("numMinesChoice", -1);
+        int boardSize = options.getCurrentBoardOption();
+        int mines = options.getCurrentMineOption();
         TextView boardConfigView = findViewById(R.id.boardConfigView);
         TextView mineNumView = findViewById(R.id.mineNumView);
 
-        switch (boardSize) {
-            case(0):
-                boardConfigView.setText("Board size: 4 x 6");
-                break;
-            case (1):
-                boardConfigView.setText("Board size: 5 x 10");
-                break;
-            case(2):
-                boardConfigView.setText("Board size: 6 x 15");
-                break;
-            default:
-                boardConfigView.setText("Board size: 5 x 7");
-        }
 
-        switch (mines) {
-            case(0):
-                mineNumView.setText("Mine count: 6");
-                break;
-            case(1):
-                mineNumView.setText("Mine count: 10");
-                break;
-            case(2):
-                mineNumView.setText("Mine count: 15");
-                break;
-            case(3):
-                mineNumView.setText("Mine count: 20");
-                break;
-            default:
-                mineNumView.setText("Mine count: 3");
-        }
+        boardConfigView.setText("Board size: " + options.getStringCurrentDimensions());
+        mineNumView.setText("Mine count: " + options.getStringCurrentMine());
 
         TextView highScoreView = findViewById(R.id.highScoreView);
         int highscore = gameData.getHighScore(boardSize, mines);
-        if (highscore != DEFAULT_BEST_SCORE) {
+
+        if (gameData.isThereScore(boardSize, mines)) {
             highScoreView.setText("Best score for this configuration: " + highscore);
         } else {
-            highScoreView.setText("Best score for this configuration: [none]");
+            highScoreView.setText("No score for this configuration");
         }
     }
 

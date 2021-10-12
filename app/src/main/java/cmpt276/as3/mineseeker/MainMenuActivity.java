@@ -63,7 +63,12 @@ public class MainMenuActivity extends AppCompatActivity {
         mineNumView.setText("Mine count: " + options.getStringCurrentMine());
 
         TextView highScoreView = findViewById(R.id.highScoreView);
-        int highscore = gameData.getHighScore(boardSize, mines);
+        int highscore;
+        if (gameData.isThereScore(boardSize, mines)) {
+            highscore = gameData.getHighScore(boardSize, mines);
+        } else {
+            highscore = -1;
+        }
 
         if (gameData.isThereScore(boardSize, mines)) {
             highScoreView.setText("Best score for this configuration: " + highscore);

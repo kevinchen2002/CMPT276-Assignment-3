@@ -50,14 +50,19 @@ public class GameData {
 
     public void setHighScore(int boardOption, int mineOption, int score) {
         int index = MINE_CONFIGS*boardOption + mineOption;
-        if (score < highScores.get(index)) {
+        if (highScores.get(index) == null || score < highScores.get(index)) {
             highScores.set(index, score);
         }
     }
 
     public int getHighScore (int boardOption, int mineOption) {
         int index = MINE_CONFIGS*boardOption + mineOption;
-        return highScores.get(index);
+        if (isThereScore(boardOption, mineOption)) {
+            return highScores.get(index);
+        } else {
+            return -1;
+        }
+        //return highScores.get(index);
     }
 
     public int getHighScore (int index) {

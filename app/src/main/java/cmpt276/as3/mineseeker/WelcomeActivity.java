@@ -12,9 +12,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Timer;
 import java.util.TimerTask;
 
+
+/**
+ * WelcomeActivity is the activity seen upon startup.
+ * It plays a brief animation and continues when said animation is complete.
+ * The user can also press a button to manually continue to MainMenuActivity.
+ */
 public class WelcomeActivity extends AppCompatActivity {
     private final Timer timer = new Timer();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,9 +40,6 @@ public class WelcomeActivity extends AppCompatActivity {
         });
     }
 
-    /**
-     * Basic timer functionality learned from https://www.youtube.com/watch?v=KyeS8uuahiU
-     */
     void timedStart() {
         TimerTask timerTask = new TimerTask() {
             @Override
@@ -50,9 +52,6 @@ public class WelcomeActivity extends AppCompatActivity {
         timer.schedule(timerTask, 5000, 5000);
     }
 
-    /**
-     * Animations learned from https://www.tutorialspoint.com/android/android_animations.htm
-     */
     void clockwise() {
         ImageView image = findViewById(R.id.exampleImage);
         Animation clockwiseSpin =

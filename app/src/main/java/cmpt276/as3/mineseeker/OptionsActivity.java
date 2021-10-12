@@ -19,6 +19,8 @@ import cmpt276.as3.mineseeker.model.GameData;
 import cmpt276.as3.mineseeker.model.OptionsManager;
 
 /**
+ * This activity uses spinners to allow the user to select preset board and mine options.
+ * This information is stored in a singleton, and the game is constructed in GameActivity.
  * Learned basic spinner functionality from https://www.tutorialspoint.com/android/android_spinner_control.htm
  */
 public class OptionsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {

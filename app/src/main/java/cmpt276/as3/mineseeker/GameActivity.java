@@ -23,7 +23,9 @@ import cmpt276.as3.mineseeker.model.GameData;
 import cmpt276.as3.mineseeker.model.MineManager;
 import cmpt276.as3.mineseeker.model.OptionsManager;
 
-
+/**
+ * TODO: [Josh insert stuff here]
+ */
 public class GameActivity extends AppCompatActivity {
     private final GameData gameData = GameData.getInstance();
     private final OptionsManager options = OptionsManager.getInstance();

@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -67,6 +69,7 @@ public class GameActivity extends AppCompatActivity {
         gameData.startGame();
         showBestScore();
         initializeMines();
+        fillAllButtons();
         updateMineCount();
         updateScanCount();
         populateMines();
@@ -131,6 +134,22 @@ public class GameActivity extends AppCompatActivity {
                 buttons[row][col] = button;
             }
         }
+    }
+
+    //TODO: grass doesn't show
+    private void fillAllButtons() {
+       for (int y = 0; y < NUM_COLUMNS; y++) {
+           for (int x = 0; x < NUM_ROWS; x++) {
+               Button button = buttons[x][y];
+               if (button != null) {
+                   Log.d("BUTTON", "found");
+                    Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.grasstile);
+                    Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, button.getWidth(), button.getHeight(), true);
+                    Resources resource = getResources();
+                    button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+               }
+           }
+       }
     }
 
     @SuppressLint("SetTextI18n")
@@ -198,11 +217,13 @@ public class GameActivity extends AppCompatActivity {
      * @param imageName the name of the Pokemon in question
      */
     private void scaleImageToButton (Button button, String imageName) {
-        int newWidth = button.getWidth();
-        int newHeight = button.getHeight();
+        int scaleWidth = button.getWidth();
+        int scaleHeight = button.getHeight();
+
         int imageID = getResources().getIdentifier(imageName, "drawable", GameActivity.this.getPackageName());
         Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), imageID);
-        Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
+
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, scaleWidth, scaleHeight, true);
         Resources resource = getResources();
         button.setBackground(new BitmapDrawable(resource, scaledBitmap));
     }

@@ -8,9 +8,11 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -18,6 +20,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 
 import cmpt276.as3.mineseeker.model.GameData;
 import cmpt276.as3.mineseeker.model.MineManager;
@@ -40,6 +47,12 @@ public class GameActivity extends AppCompatActivity {
     private int NUM_ROWS;
     private int NUM_COLUMNS;
     private int NUM_MINES;
+
+    private final ArrayList pokemonList = new ArrayList<String>(Arrays.asList("aron","bidoof",
+            "blitzle","cubone","cyndaquil","drilbur","ducklett","electrike","gligar","hoppip",
+            "horsea","joltik","larvesta","litwick","mantyke","omanyte","paras","poliwag",
+            "roggenrola","skorupi","snivy","snover","spinarak","starly","taillow","tangela",
+            "tirtouga","togepi","treecko","turtwig","tynamo","wailmer","yanma"));
 
     private MineManager gameMineManager;
 
@@ -146,7 +159,9 @@ public class GameActivity extends AppCompatActivity {
         Button button = buttons[x][y];
         updateMineCount();
         lockButtonSize();
-        scaleImageToButton(button, R.drawable.coolguy);
+        String pokemonName = getRandomPokemon();
+        scaleImageToButton(button, pokemonName);
+        playAudio(pokemonName);
         if (gameMineManager.isGameWon()) {
             winGame();
         }
@@ -177,13 +192,37 @@ public class GameActivity extends AppCompatActivity {
                 gameMineManager.getNumMines()));
     }
 
-    private void scaleImageToButton (Button button, int imageID) {
+    /**
+     * All Pokemon sprites taken from https://pokemondb.net/sprites
+     * @param button the button (Pokemon) being pressed
+     * @param imageName the name of the Pokemon in question
+     */
+    private void scaleImageToButton (Button button, String imageName) {
         int newWidth = button.getWidth();
         int newHeight = button.getHeight();
+        int imageID = getResources().getIdentifier(imageName, "drawable", GameActivity.this.getPackageName());
         Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), imageID);
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, newWidth, newHeight, true);
         Resources resource = getResources();
         button.setBackground(new BitmapDrawable(resource, scaledBitmap));
+    }
+
+    /**
+     * All Pokemon cries taken from https://play.pokemonshowdown.com/audio/cries/
+     * @param soundName the name of the Pokemon in question
+     */
+    private void playAudio (String soundName) {
+        int soundID = getResources().getIdentifier(soundName, "raw", GameActivity.this.getPackageName());
+        MediaPlayer mp = MediaPlayer.create(this, soundID);
+        mp.start();
+
+    }
+
+    private String getRandomPokemon() {
+        Random random = new Random();
+        Log.d("LIST SIZE", ""+pokemonList.size());
+        int randomIndex = random.nextInt(pokemonList.size());
+        return (String) pokemonList.get(randomIndex);
     }
 
     private void lockButtonSize() {

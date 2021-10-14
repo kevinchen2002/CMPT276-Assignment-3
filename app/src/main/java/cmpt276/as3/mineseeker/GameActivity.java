@@ -236,7 +236,6 @@ public class GameActivity extends AppCompatActivity {
         int soundID = getResources().getIdentifier(soundName, "raw", GameActivity.this.getPackageName());
         MediaPlayer mp = MediaPlayer.create(this, soundID);
         mp.start();
-
     }
 
     private String getRandomPokemon() {

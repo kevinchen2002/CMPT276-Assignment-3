@@ -1,6 +1,7 @@
 package cmpt276.as3.mineseeker;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -39,6 +40,7 @@ public class WelcomeActivity extends AppCompatActivity {
         btn.setOnClickListener(v -> {
             Intent launchMainMenu = MainMenuActivity.makeIntent(WelcomeActivity.this);
             startActivity(launchMainMenu);
+            playAudio(R.raw.pokeball_pop);
             timer.cancel();
         });
     }
@@ -49,6 +51,7 @@ public class WelcomeActivity extends AppCompatActivity {
             public void run() {
                 Intent launchMainMenu = MainMenuActivity.makeIntent(WelcomeActivity.this);
                 startActivity(launchMainMenu);
+                playAudio(R.raw.pokeball_pop);
                 timer.cancel();
             }
         };
@@ -84,5 +87,10 @@ public class WelcomeActivity extends AppCompatActivity {
         Animation slideFromBottom =
                 AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_from_bottom);
         image.startAnimation(slideFromBottom);
+    }
+
+    private void playAudio (int id) {
+        MediaPlayer mp = MediaPlayer.create(this, id);
+        mp.start();
     }
 }

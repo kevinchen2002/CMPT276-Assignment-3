@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Mine Seeker</string>
-    <string name="title_text">Mine Seeker</string>
+    <string name="app_name">Pokémon Pal Park</string>
+    <string name="title_text">Pokémon Pal Park</string>
     <string name="name_text">Kevin Chen, Joshua Li</string>
     <string name="playBtn">PLAY</string>
     <string name="optionsBtn">OPTIONS</string>
@@ -19,6 +19,10 @@
     <string name="winMessage">You solved the crisis!</string>
     <string name="win_dialog_description">A cool guy wearing sunglassse</string>
     <string name="bestScoreView">No best score for this configuration!</string>
+    <string name="welcometurtwig">welcomeTurtwig</string>
+    <string name="welcomehorsea">welcomeHorsea</string>
+    <string name="welcomepokeball">welcomePokeball</string>
+    <string name="welcomeTitle">welcomeTitle</string>
     <string-array name="board_sizes">
         <item>4 x 6</item>
         <item>5 x 10</item>

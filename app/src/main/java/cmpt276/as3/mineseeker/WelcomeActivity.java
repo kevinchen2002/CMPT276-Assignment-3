@@ -26,7 +26,10 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_activity);
 
-        clockwise();
+        clockwise(R.id.welcomePokeball);
+        slideFromLeft(R.id.welcomeHorsea);
+        slideFromRight(R.id.welcomeTurtwig);
+        slideFromBottom(R.id.welcomeTitle);
         continueToMainButton();
         timedStart();
     }
@@ -52,10 +55,34 @@ public class WelcomeActivity extends AppCompatActivity {
         timer.schedule(timerTask, 5000, 5000);
     }
 
-    void clockwise() {
-        ImageView image = findViewById(R.id.exampleImage);
+    /**
+     * Animations learned from https://www.tutorialspoint.com/android/android_animations.htm
+     */
+    void clockwise(int id) {
+        ImageView image = findViewById(id);
         Animation clockwiseSpin =
                 AnimationUtils.loadAnimation(getApplicationContext(), R.anim.clockwise);
         image.startAnimation(clockwiseSpin);
+    }
+
+    void slideFromLeft(int id) {
+        ImageView image = findViewById(id);
+        Animation slideFromLeft =
+                AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_from_left);
+        image.startAnimation(slideFromLeft);
+    }
+
+    void slideFromRight(int id) {
+        ImageView image = findViewById(id);
+        Animation slideFromRight =
+                AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_from_right);
+        image.startAnimation(slideFromRight);
+    }
+
+    void slideFromBottom(int id) {
+        ImageView image = findViewById(id);
+        Animation slideFromBottom =
+                AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_from_bottom);
+        image.startAnimation(slideFromBottom);
     }
 }

@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -69,7 +70,6 @@ public class GameActivity extends AppCompatActivity {
         gameData.startGame();
         showBestScore();
         initializeMines();
-        fillAllButtons();
         updateMineCount();
         updateScanCount();
         populateMines();
@@ -130,33 +130,36 @@ public class GameActivity extends AppCompatActivity {
                 };
                 gameMineManager.registerChangeCallBack(obs);
 
+                button.setBackgroundResource(R.drawable.grasstile);
                 tableRow.addView(button);
                 buttons[row][col] = button;
             }
         }
     }
 
-    //TODO: grass doesn't show
-    private void fillAllButtons() {
-       for (int y = 0; y < NUM_COLUMNS; y++) {
-           for (int x = 0; x < NUM_ROWS; x++) {
-               Button button = buttons[x][y];
-               if (button != null) {
-                   Log.d("BUTTON", "found");
-                    Bitmap originalBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.grasstile);
-                    Bitmap scaledBitmap = Bitmap.createScaledBitmap(originalBitmap, button.getWidth(), button.getHeight(), true);
-                    Resources resource = getResources();
-                    button.setBackground(new BitmapDrawable(resource, scaledBitmap));
-               }
-           }
-       }
-    }
-
     @SuppressLint("SetTextI18n")
     private void scanMineAt(int x, int y) {
+        Button button = buttons[x][y];
         if (gameMineManager.isTappedAt(x, y)) {
+            if (!gameMineManager.wasMineAt(x, y)) {
+                button.setBackground(null);
+            }
             int mineCount = gameMineManager.getNearbyMines(x, y);
-            buttons[x][y].setText("" + mineCount);
+            lockButtonSize();
+            button.setText("" + mineCount);
+            button.setTypeface(null, Typeface.BOLD);
+        }
+    }
+
+    private void revealMine(int x, int y) {
+        Button button = buttons[x][y];
+        updateMineCount();
+        lockButtonSize();
+        String pokemonName = getRandomPokemon();
+        scaleImageToButton(button, pokemonName);
+        playAudio(pokemonName);
+        if (gameMineManager.isGameWon()) {
+            winGame();
         }
     }
 
@@ -171,18 +174,6 @@ public class GameActivity extends AppCompatActivity {
             mineFeedback.vibrate(VibrationEffect.createOneShot(
                     ((long) (mineCount + 1) * EMPTY_VIBE_MULTIPLIER),
                     EMPTY_VIBE_TIME));
-        }
-    }
-
-    private void revealMine(int x, int y) {
-        Button button = buttons[x][y];
-        updateMineCount();
-        lockButtonSize();
-        String pokemonName = getRandomPokemon();
-        scaleImageToButton(button, pokemonName);
-        playAudio(pokemonName);
-        if (gameMineManager.isGameWon()) {
-            winGame();
         }
     }
 
@@ -275,7 +266,7 @@ public class GameActivity extends AppCompatActivity {
             GameData storeResults = GameData.getInstance();
             storeResults.setHighScore(boardSize, mines, gameMineManager.getMinesChecked());
         }
-
+        //TODO: deregister observers in callback
         super.finish();
     }
 

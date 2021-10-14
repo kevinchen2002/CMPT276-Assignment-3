@@ -24,6 +24,10 @@ public class MineManager {
         observers.add(obs);
     }
 
+    public void deRegisterChangeCallBack(MineScanObserver obs) {
+        observers.remove(obs);
+    }
+
     private void refreshScreen() {
         for (MineScanObserver obs : observers) {
             obs.gotCallBack();
@@ -57,7 +61,7 @@ public class MineManager {
         while (i < NUM_MINES) {
             int randRow = rand.nextInt(NUM_ROWS);
             int randCol = rand.nextInt(NUM_COLUMNS);
-            if (!mineCoordinates[randRow][randCol].hasMine()) {
+            if (!mineCoordinates[randRow][randCol].hasActiveMine()) {
                 mineCoordinates[randRow][randCol].setMine();
                 i++;
             }
@@ -66,7 +70,7 @@ public class MineManager {
 
     public boolean isMineAt(int x, int y) {
         CellInfo currentCell = mineCoordinates[x][y];
-        if (currentCell.hasMine()) {
+        if (currentCell.hasActiveMine()) {
             minesFound++;
             currentCell.disableMine();
             refreshScreen();
@@ -80,7 +84,11 @@ public class MineManager {
     }
 
     public boolean checkMineAt(int x, int y) {
-        return mineCoordinates[x][y].hasMine();
+        return mineCoordinates[x][y].hasActiveMine();
+    }
+
+    public boolean wasMineAt(int x, int y) {
+        return mineCoordinates[x][y].wasMine();
     }
 
     public boolean isTappedAt(int x, int y) {
@@ -91,12 +99,12 @@ public class MineManager {
         int foundMines = 0;
 
         for (int row = 0; row < NUM_ROWS; row++) {
-            if (mineCoordinates[row][y].hasMine()) {
+            if (mineCoordinates[row][y].hasActiveMine()) {
                 foundMines++;
             }
         }
         for (int col = 0; col < NUM_COLUMNS; col++) {
-            if (mineCoordinates[x][col].hasMine()) {
+            if (mineCoordinates[x][col].hasActiveMine()) {
                 foundMines++;
             }
         }

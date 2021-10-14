@@ -1,20 +1,27 @@
 package cmpt276.as3.mineseeker.model;
 
 public class CellInfo {
-    private boolean hasMine;
+    private boolean hasActiveMine;
+    private boolean wasMine;
     private boolean hasBeenTapped;
 
     public CellInfo() {
-        hasMine = false;
+        hasActiveMine = false;
         hasBeenTapped = false;
+        wasMine = false;
     }
 
     public void setMine() {
-        this.hasMine = true;
+        this.hasActiveMine = true;
+        this.wasMine = true;
     }
 
-    public boolean hasMine() {
-        return hasMine;
+    public boolean hasActiveMine() {
+        return hasActiveMine;
+    }
+
+    public boolean wasMine() {
+        return wasMine;
     }
 
     public boolean hasBeenTapped() {
@@ -26,6 +33,6 @@ public class CellInfo {
     }
 
     public void disableMine() {
-        hasMine = false;
+        hasActiveMine = false;
     }
 }

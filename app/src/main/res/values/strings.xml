@@ -9,7 +9,7 @@
     <string name="board_size">Board Size</string>
     <string name="num_mines"># Mines</string>
     <string name="helpTitle">Help</string>
-    <string name="helpText"><a href="https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home">Assignment description</a>\nGame information here</string>
+    <string name="helpText"><a href="https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home\nhttps://steamcommunity.com/sharedfiles/filedetails/?id=835140343">Assignment description</a>\nGame information here</string>
     <string name="start_btn">START</string>
     <string name="gamesPlayedText">TextView</string>
     <string name="boardConfigText">TextView</string>

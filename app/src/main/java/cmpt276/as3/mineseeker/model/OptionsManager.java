@@ -15,7 +15,7 @@ public class OptionsManager {
     private OptionsManager() {
         boardDimensions.add(new int[]{4, 6});
         boardDimensions.add(new int[]{5, 10});
-        boardDimensions.add(new int[]{6, 16});
+        boardDimensions.add(new int[]{6, 15});
 
         mineOptions.add(6);
         mineOptions.add(10);

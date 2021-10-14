@@ -22,6 +22,10 @@ import java.util.ArrayList;
 import cmpt276.as3.mineseeker.model.GameData;
 import cmpt276.as3.mineseeker.model.OptionsManager;
 
+/**
+ * MainMenuActivity allows the user to navigate to Options, the game, or Help.
+ * Information about the game is also displayed, including configuration, games played, and highscore.
+ */
 public class MainMenuActivity extends AppCompatActivity {
     private final GameData gameData = GameData.getInstance();
     private final OptionsManager options = OptionsManager.getInstance();
@@ -63,7 +67,12 @@ public class MainMenuActivity extends AppCompatActivity {
         mineNumView.setText("Mine count: " + options.getStringCurrentMine());
 
         TextView highScoreView = findViewById(R.id.highScoreView);
-        int highscore = gameData.getHighScore(boardSize, mines);
+        int highscore;
+        if (gameData.isThereScore(boardSize, mines)) {
+            highscore = gameData.getHighScore(boardSize, mines);
+        } else {
+            highscore = -1;
+        }
 
         if (gameData.isThereScore(boardSize, mines)) {
             highScoreView.setText("Best score for this configuration: " + highscore);

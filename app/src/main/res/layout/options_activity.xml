@@ -13,7 +13,7 @@
         android:layout_marginEnd="152dp"
         android:layout_marginBottom="32dp"
         android:minHeight="48dp"
-        android:textSize="16sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/numMinesDropDown"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -25,8 +25,8 @@
         android:layout_marginEnd="152dp"
         android:layout_marginBottom="108dp"
         android:minHeight="48dp"
-        android:textSize="16sp"
         android:textColor="@android:color/primary_text_light_nodisable"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -44,7 +44,8 @@
         app:layout_constraintHorizontal_bias="0.97"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/numMinesDropDown"
-        app:layout_constraintVertical_bias="0.375" />
+        app:layout_constraintVertical_bias="0.375"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/optionsTitle"
@@ -79,7 +80,9 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
         android:text="@string/resetBtn"
+        android:textColor="#AED581"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="TextContrastCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

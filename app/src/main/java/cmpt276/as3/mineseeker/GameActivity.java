@@ -49,11 +49,11 @@ public class GameActivity extends AppCompatActivity {
     private int NUM_COLUMNS;
     private int NUM_MINES;
 
-    private final ArrayList pokemonList = new ArrayList<String>(Arrays.asList("aron","bidoof",
-            "blitzle","cubone","cyndaquil","drilbur","ducklett","electrike","gligar","hoppip",
-            "horsea","joltik","larvesta","litwick","mantyke","omanyte","paras","poliwag",
-            "roggenrola","skorupi","snivy","snover","spinarak","starly","taillow","tangela",
-            "tirtouga","togepi","treecko","turtwig","tynamo","wailmer","yanma"));
+    private final ArrayList pokemonList = new ArrayList<>(Arrays.asList("aron", "bidoof",
+            "blitzle", "cubone", "cyndaquil", "drilbur", "ducklett", "electrike", "gligar", "hoppip",
+            "horsea", "joltik", "larvesta", "litwick", "mantyke", "omanyte", "paras", "poliwag",
+            "roggenrola", "skorupi", "snivy", "snover", "spinarak", "starly", "taillow", "tangela",
+            "tirtouga", "togepi", "treecko", "turtwig", "tynamo", "wailmer", "yanma"));
 
     private MineManager gameMineManager;
 
@@ -123,9 +123,7 @@ public class GameActivity extends AppCompatActivity {
                     updateScanCount();
                 });
 
-                MineManager.MineScanObserver obs = () -> {
-                    scanMineAt(FINAL_ROW, FINAL_COL);
-                };
+                MineManager.MineScanObserver obs = () -> scanMineAt(FINAL_ROW, FINAL_COL);
                 gameMineManager.registerChangeCallBack(obs);
 
                 button.setBackgroundResource(R.drawable.grasstile);
@@ -196,7 +194,7 @@ public class GameActivity extends AppCompatActivity {
     @SuppressLint("DefaultLocale")
     public void updateMineCount() {
         TextView mineCount = findViewById(R.id.showMinesFound);
-        mineCount.setText(String.format("Found %d of %d mines",
+        mineCount.setText(String.format("%d of %d Pokémon caught!",
                 gameMineManager.getMinesFound(),
                 gameMineManager.getNumMines()));
     }

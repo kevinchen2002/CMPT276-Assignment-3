@@ -55,7 +55,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 timer.cancel();
             }
         };
-        timer.schedule(timerTask, 5000, 10000);
+        timer.schedule(timerTask, 9000, 18000);
     }
 
     /**

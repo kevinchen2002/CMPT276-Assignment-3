@@ -1,6 +1,5 @@
 package cmpt276.as3.mineseeker;
 
-import android.app.VoiceInteractor;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -62,7 +61,7 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
      */
     void boardSizeSpinner() {
         Spinner boardSizeSpinner = findViewById(R.id.boardSizeDropDown);
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter(this,
+        ArrayAdapter adapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_item, options.getStringDimensions());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         boardSizeSpinner.setAdapter(adapter);
@@ -77,7 +76,7 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
      */
     void numMinesSpinner() {
         Spinner numMinesSpinner = findViewById(R.id.numMinesDropDown);
-        ArrayAdapter<CharSequence> adapter = new ArrayAdapter(this,
+        ArrayAdapter adapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_item, options.getStringMines());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         numMinesSpinner.setAdapter(adapter);

@@ -143,9 +143,16 @@ public class GameActivity extends AppCompatActivity {
             int mineCount = gameMineManager.getNearbyMines(x, y);
             lockButtonSize();
             button.setText("" + mineCount);
-            button.setTypeface(null, Typeface.BOLD);
-            button.setTextColor(Color.WHITE);
+
+            setButtonStyle(button);
         }
+    }
+
+    private void setButtonStyle(Button button) {
+        Typeface pokeFont = getResources().getFont(R.font.pokemon_font);
+        button.setTypeface(pokeFont);
+        button.setTextColor(Color.WHITE);
+        button.setTextSize(11);
     }
 
     private void revealMine(int x, int y) {

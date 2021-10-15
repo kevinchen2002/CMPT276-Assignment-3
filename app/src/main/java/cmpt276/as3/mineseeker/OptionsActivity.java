@@ -60,6 +60,7 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
      * Spinner functionality learned from https://bootstraphunter.com/how-to-add-a-dropdown-menu-in-android-studio/
      */
     void boardSizeSpinner() {
+        //TODO: see if font can be changed for this
         Spinner boardSizeSpinner = findViewById(R.id.boardSizeDropDown);
         ArrayAdapter adapter = new ArrayAdapter(this,
                 android.R.layout.simple_spinner_item, options.getStringDimensions());

@@ -3,9 +3,11 @@ package cmpt276.as3.mineseeker;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
 
@@ -23,11 +25,16 @@ public class WinMessageFragment extends AppCompatDialogFragment {
                 requireActivity().finish();
             }
         };
-
-        return new AlertDialog.Builder(getActivity())
-                .setTitle("Congratulations!")
+        AlertDialog winMessage = new AlertDialog.Builder(getActivity())
                 .setView(v)
                 .setPositiveButton(android.R.string.ok, listener)
-                .create();
+                .show();
+        TextView fragmentHeader = (TextView)winMessage.findViewById(android.R.id.button1);
+        Typeface pokeFont = getResources().getFont(R.font.pokemon_font);
+        fragmentHeader.setTypeface(pokeFont);
+
+
+        return winMessage;
+
     }
 }

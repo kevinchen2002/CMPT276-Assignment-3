@@ -11,6 +11,7 @@
         android:layout_marginStart="32dp"
         android:text="@string/winMessage"
         android:textSize="20sp"
+        android:fontFamily="@font/pokefont"
         app:layout_constraintBottom_toBottomOf="@+id/winText"
         app:layout_constraintStart_toEndOf="@+id/winText"
         app:layout_constraintTop_toTopOf="@+id/winText" />
@@ -22,6 +23,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:contentDescription="@string/win_dialog_description"
+        android:fontFamily="@font/pokefont"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/profoak" />

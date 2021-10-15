@@ -62,7 +62,7 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
     void boardSizeSpinner() {
         //TODO: see if font can be changed for this
         Spinner boardSizeSpinner = findViewById(R.id.boardSizeDropDown);
-        ArrayAdapter adapter = new ArrayAdapter(this,
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, options.getStringDimensions());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         boardSizeSpinner.setAdapter(adapter);
@@ -77,7 +77,7 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
      */
     void numMinesSpinner() {
         Spinner numMinesSpinner = findViewById(R.id.numMinesDropDown);
-        ArrayAdapter adapter = new ArrayAdapter(this,
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, options.getStringMines());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         numMinesSpinner.setAdapter(adapter);

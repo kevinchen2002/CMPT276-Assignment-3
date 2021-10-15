@@ -49,6 +49,8 @@ public class GameActivity extends AppCompatActivity {
     private int NUM_COLUMNS;
     private int NUM_MINES;
 
+    private MediaPlayer mpGrass;
+
     private final ArrayList pokemonList = new ArrayList<>(Arrays.asList("aron", "bidoof",
             "blitzle", "cubone", "cyndaquil", "drilbur", "ducklett", "electrike", "gligar", "hoppip",
             "horsea", "joltik", "larvesta", "litwick", "mantyke", "omanyte", "paras", "poliwag",
@@ -62,6 +64,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sp = getSharedPreferences("MineSeeker", Context.MODE_PRIVATE);
+        mpGrass = MediaPlayer.create(this, R.raw.grass_sfx);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_activity);
 
@@ -72,7 +75,6 @@ public class GameActivity extends AppCompatActivity {
         updateScanCount();
         populateMines();
     }
-
 
     private void initializeMines() {
         NUM_ROWS = options.getRow();
@@ -111,6 +113,7 @@ public class GameActivity extends AppCompatActivity {
                 button.setPadding(0,0,0,0);
 
                 button.setOnClickListener(v -> {
+
                     if (gameMineManager.isTappedAt(FINAL_ROW, FINAL_COL)) {
                         return;
                     }
@@ -118,6 +121,7 @@ public class GameActivity extends AppCompatActivity {
                     if (gameMineManager.isMineAt(FINAL_ROW, FINAL_COL)) {
                         revealMine(FINAL_ROW, FINAL_COL);
                     } else {
+                        mpGrass.start();
                         scanMineAt(FINAL_ROW, FINAL_COL);
                     }
                     updateScanCount();
@@ -161,7 +165,7 @@ public class GameActivity extends AppCompatActivity {
         lockButtonSize();
         String pokemonName = getRandomPokemon();
         scaleImageToButton(button, pokemonName);
-        playAudio(pokemonName);
+        playCry(pokemonName);
         if (gameMineManager.isGameWon()) {
             winGame();
         }
@@ -226,7 +230,7 @@ public class GameActivity extends AppCompatActivity {
      * All Pokemon cries taken from https://play.pokemonshowdown.com/audio/cries/
      * @param soundName the name of the Pokemon in question
      */
-    private void playAudio (String soundName) {
+    private void playCry(String soundName) {
         int soundID = getResources().getIdentifier(soundName, "raw", GameActivity.this.getPackageName());
         MediaPlayer mp = MediaPlayer.create(this, soundID);
         mp.start();
@@ -257,6 +261,8 @@ public class GameActivity extends AppCompatActivity {
 
     private void winGame() {
         FragmentManager manager = getSupportFragmentManager();
+        MediaPlayer mp = MediaPlayer.create(this, R.raw.win_sfx);
+        mp.start();
         WinMessageFragment winnerMessage = new WinMessageFragment();
         winnerMessage.show(manager, "You did it!");
     }

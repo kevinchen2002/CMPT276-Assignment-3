@@ -38,6 +38,7 @@ public class WelcomeActivity extends AppCompatActivity {
     void continueToMainButton() {
         Button btn = findViewById(R.id.welcome_button);
         btn.setOnClickListener(v -> {
+            //TODO: make one function so the sound doesn't play twice
             Intent launchMainMenu = MainMenuActivity.makeIntent(WelcomeActivity.this);
             startActivity(launchMainMenu);
             playAudio(R.raw.pokeball_pop);

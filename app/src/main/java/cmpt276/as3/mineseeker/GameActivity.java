@@ -161,7 +161,6 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void vibrateByCell(int x, int y) {
-        //TODO: convert into constants or local variables? As Brian which to do
         Vibrator mineFeedback = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if (gameMineManager.checkMineAt(x, y)) {
             mineFeedback.vibrate(VibrationEffect.createOneShot(MINE_VIBE_AMPLITUDE,
@@ -267,7 +266,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     public void finish() {
         checkWinCondition();
-        //TODO: deregister observers in callback
+        gameMineManager.deRegisterAllChangeCallBack();
         super.finish();
     }
 

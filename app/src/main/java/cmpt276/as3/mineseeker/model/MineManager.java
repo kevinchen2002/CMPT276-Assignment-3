@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Random;
 
 public class MineManager {
-    //TODO: change these two grid into one
     CellInfo[][] mineCoordinates;
 
     private final int NUM_ROWS;
@@ -24,8 +23,8 @@ public class MineManager {
         observers.add(obs);
     }
 
-    public void deRegisterChangeCallBack(MineScanObserver obs) {
-        observers.remove(obs);
+    public void deRegisterAllChangeCallBack() {
+        observers.clear();
     }
 
     private void refreshScreen() {

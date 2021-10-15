@@ -6,14 +6,24 @@
     <string name="optionsBtn">OPTIONS</string>
     <string name="helpBtn">HELP</string>
     <string name="optionTitle">Options</string>
-    <string name="board_size">Board Size</string>
+    <string name="board_size">Field Size</string>
     <string name="num_mines"># Pokemon</string>
     <string name="helpTitle">Help</string>
     <string name="helpText"><a href="https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home">Assignment description</a>
-        \nGame information here
-        \nhttps://steamcommunity.com/sharedfiles/filedetails/?id=835140343
+        \n\nHello there! Welcome to the world of Pokémon! My name is Oak! People call me the Pokémon Prof!
+        \nThis world is inhabited by creatures called Pokémon! For some people, Pokémon are pets.
+        \nOthers use them for fights. Myself, I study Pokémon as a profession. And I need your help to
+        \nfind new species of Pokémon! To start searching for Pokémon, press "PLAY" on the main menu.
+        \nThis will take you to a field of tall grass. Press on a tile of tall grass to inspect it.
+        \nYou\'ll know a Pokémon when you see it pop up and hear its cry! If the tall grass has no Pokémon,
+        \nyou\'ll be able to scan how many there are in the same row and column. You can change the field
+        \nsize and number of Pokémon in the options menu. You can also clear all data. Good luck, trainer!
+
+        \n\nhttps://steamcommunity.com/sharedfiles/filedetails/?id=835140343
         \nhttps://bulbapedia.bulbagarden.net/wiki/Professor_Oak
-        \nhttps://www.deviantart.com/skatefilter5/art/Pokemon-Ground-600573792</string>
+        \nhttps://www.deviantart.com/skatefilter5/art/Pokemon-Ground-600573792
+        \nhttps://pokemondb.net/sprites
+        \nhttps://play.pokemonshowdown.com/audio/cries/</string>
     <string name="start_btn">START</string>
     <string name="gamesPlayedText">TextView</string>
     <string name="boardConfigText">TextView</string>
@@ -27,6 +37,5 @@
     <string name="welcomehorsea">welcomeHorsea</string>
     <string name="welcomepokeball">welcomePokeball</string>
     <string name="welcomeTitle">welcomeTitle</string>
-
 
 </resources>

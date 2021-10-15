@@ -79,7 +79,7 @@ public class OptionsManager {
     public List<String> getStringMines() {
         List<String> stringOptions = new ArrayList<>();
         for (int mines : mineOptions) {
-            stringOptions.add(mines + " mines");
+            stringOptions.add(mines + " Pokémon");
         }
         return stringOptions;
     }

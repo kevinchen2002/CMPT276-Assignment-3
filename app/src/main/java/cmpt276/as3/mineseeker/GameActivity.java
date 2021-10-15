@@ -144,7 +144,7 @@ public class GameActivity extends AppCompatActivity {
             lockButtonSize();
             button.setText("" + mineCount);
             button.setTypeface(null, Typeface.BOLD);
-            button.setTextColor(Color.BLACK);
+            button.setTextColor(Color.WHITE);
         }
     }
 

@@ -62,8 +62,8 @@ public class MainMenuActivity extends AppCompatActivity {
         TextView mineNumView = findViewById(R.id.mineNumView);
 
 
-        boardConfigView.setText("Board size: " + options.getStringCurrentDimensions());
-        mineNumView.setText("Mine count: " + options.getStringCurrentMine());
+        boardConfigView.setText("Field size: " + options.getStringCurrentDimensions());
+        mineNumView.setText("Pokémon count: " + options.getStringCurrentMine());
 
         TextView highScoreView = findViewById(R.id.highScoreView);
 

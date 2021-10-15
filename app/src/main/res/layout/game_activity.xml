@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/grassbackground">
 
     <TableLayout
         android:id="@+id/mine_table"
@@ -13,6 +14,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:stretchColumns="*"
+        android:textColor="@android:color/primary_text_light_nodisable"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,6 +29,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text=""
+        android:textColor="@android:color/primary_text_light_nodisable"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,6 +40,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text=""
+        android:textColor="@android:color/primary_text_light_nodisable"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,6 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="11dp"
         android:text="@string/bestScoreView"
+        android:textColor="@android:color/primary_text_light_nodisable"
         app:layout_constraintBottom_toTopOf="@+id/mine_table"
         app:layout_constraintEnd_toStartOf="@+id/showScansUsed"
         app:layout_constraintStart_toEndOf="@+id/showMinesFound"

@@ -7,33 +7,26 @@
     <string name="helpBtn">HELP</string>
     <string name="optionTitle">Options</string>
     <string name="board_size">Board Size</string>
-    <string name="num_mines"># Mines</string>
+    <string name="num_mines"># Pokemon</string>
     <string name="helpTitle">Help</string>
-    <string name="helpText"><a href="https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home\nhttps://steamcommunity.com/sharedfiles/filedetails/?id=835140343">Assignment description</a>\nGame information here</string>
+    <string name="helpText"><a href="https://opencoursehub.cs.sfu.ca/bfraser/grav-cms/cmpt276/home">Assignment description</a>
+        \nGame information here
+        \nhttps://steamcommunity.com/sharedfiles/filedetails/?id=835140343
+        \nhttps://bulbapedia.bulbagarden.net/wiki/Professor_Oak
+        \nhttps://www.deviantart.com/skatefilter5/art/Pokemon-Ground-600573792</string>
     <string name="start_btn">START</string>
     <string name="gamesPlayedText">TextView</string>
     <string name="boardConfigText">TextView</string>
     <string name="mineNumText">TextView</string>
     <string name="highScoreText">TextView</string>
     <string name="resetBtn">RESET DATA</string>
-    <string name="winMessage">You solved the crisis!</string>
+    <string name="winMessage">You catched em\' all!</string>
     <string name="win_dialog_description">A cool guy wearing sunglassse</string>
     <string name="bestScoreView">No best score for this configuration!</string>
     <string name="welcometurtwig">welcomeTurtwig</string>
     <string name="welcomehorsea">welcomeHorsea</string>
     <string name="welcomepokeball">welcomePokeball</string>
     <string name="welcomeTitle">welcomeTitle</string>
-    <string-array name="board_sizes">
-        <item>4 x 6</item>
-        <item>5 x 10</item>
-        <item>6 x 15</item>
-    </string-array>
 
-    <string-array name="num_mines">
-        <item>6 mines</item>
-        <item>10 mines</item>
-        <item>15 mines</item>
-        <item>20 mines</item>
-    </string-array>
 
 </resources>

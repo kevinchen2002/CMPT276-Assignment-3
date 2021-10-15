@@ -21,8 +21,8 @@
         android:layout_height="105dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:contentDescription="@string/win_dialog_description"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/coolguy"
-        android:contentDescription="@string/win_dialog_description" />
+        app:srcCompat="@drawable/profoak" />
 </androidx.constraintlayout.widget.ConstraintLayout>

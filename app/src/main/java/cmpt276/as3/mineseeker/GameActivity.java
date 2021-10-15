@@ -7,8 +7,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.graphics.RectF;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaPlayer;
@@ -24,7 +23,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -148,6 +146,7 @@ public class GameActivity extends AppCompatActivity {
             lockButtonSize();
             button.setText("" + mineCount);
             button.setTypeface(null, Typeface.BOLD);
+            button.setTextColor(Color.BLACK);
         }
     }
 
@@ -258,16 +257,31 @@ public class GameActivity extends AppCompatActivity {
         winnerMessage.show(manager, "You did it!");
     }
 
-    @Override
-    public void finish() {
+    private void checkWinCondition() {
         if (gameMineManager.isGameWon()) {
             int boardSize = options.getCurrentBoardOption();
             int mines = options.getCurrentMineOption();
             GameData storeResults = GameData.getInstance();
             storeResults.setHighScore(boardSize, mines, gameMineManager.getMinesChecked());
         }
+    }
+
+    @Override
+    public void finish() {
+        checkWinCondition();
         //TODO: deregister observers in callback
         super.finish();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        checkWinCondition();
+        return super.onNavigateUp();
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 
     public static Intent makeIntent(Context context) {

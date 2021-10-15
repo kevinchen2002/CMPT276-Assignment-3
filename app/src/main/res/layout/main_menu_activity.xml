@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/skygrassbackground">
 
     <Button
         android:id="@+id/main_to_game_btn"
@@ -48,6 +49,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:text="@string/gamesPlayedText"
+        android:textColor="@android:color/primary_text_light_nodisable"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.104"
@@ -61,6 +64,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:text="@string/boardConfigText"
+        android:textColor="@android:color/primary_text_light_nodisable"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.104"
@@ -74,6 +79,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:text="@string/mineNumText"
+        android:textColor="@android:color/primary_text_light_nodisable"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.104"
@@ -87,6 +94,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:text="@string/highScoreText"
+        android:textColor="@android:color/primary_text_light_nodisable"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.104"

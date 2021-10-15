@@ -3,81 +3,83 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/skygrassbackground">
 
     <Spinner
         android:id="@+id/boardSizeDropDown"
         android:layout_width="280dp"
         android:layout_height="59dp"
+        android:layout_marginEnd="152dp"
+        android:layout_marginBottom="32dp"
         android:minHeight="48dp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/numMinesDropDown"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.605"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/optionsTitle"
-        app:layout_constraintVertical_bias="0.529"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Spinner
         android:id="@+id/numMinesDropDown"
         android:layout_width="280dp"
         android:layout_height="59dp"
+        android:layout_marginEnd="152dp"
+        android:layout_marginBottom="108dp"
         android:minHeight="48dp"
+        android:textSize="16sp"
+        android:textColor="@android:color/primary_text_light_nodisable"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.605"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/optionsTitle"
-        app:layout_constraintVertical_bias="0.495"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/numMinesLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:text="@string/num_mines"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@android:color/primary_text_light_nodisable"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/numMinesDropDown"
         app:layout_constraintEnd_toStartOf="@+id/numMinesDropDown"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.97"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/boardSizeLabel"
-        app:layout_constraintVertical_bias="0.333" />
+        app:layout_constraintTop_toTopOf="@+id/numMinesDropDown"
+        app:layout_constraintVertical_bias="0.375" />
 
     <TextView
         android:id="@+id/optionsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="@string/optionTitle"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@android:color/primary_text_light_nodisable"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.06" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/boardSizeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
         android:text="@string/board_size"
-        android:textSize="16sp"
+        android:textColor="@android:color/primary_text_light_nodisable"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/boardSizeDropDown"
         app:layout_constraintEnd_toStartOf="@+id/boardSizeDropDown"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="0.909"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/boardSizeDropDown"
+        app:layout_constraintVertical_bias="0.593" />
 
     <Button
         android:id="@+id/resetBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
         android:text="@string/resetBtn"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.139"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/numMinesLabel"
-        app:layout_constraintVertical_bias="0.457" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

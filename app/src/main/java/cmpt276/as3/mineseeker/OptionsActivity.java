@@ -90,18 +90,12 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         int choice = parent.getSelectedItemPosition();
-        SharedPreferences.Editor editor = sp.edit();
         if (parent.getId() == R.id.boardSizeDropDown) {
-            Log.d("BOARD", "picked " + choice);
             options.setCurrentBoardOption(choice);
         }
         if (parent.getId() == R.id.numMinesDropDown) {
-            Log.d("MINES", "picked " + choice);
-
-
-            options.setCurrentMineOption(choice);
+           options.setCurrentMineOption(choice);
         }
-        editor.apply();
     }
 
 

@@ -93,5 +93,4 @@ public class OptionsManager {
         int mines = mineOptions.get(currentMineOption);
         return (Integer.toString(mines));
     }
-
 }

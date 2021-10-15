@@ -73,7 +73,6 @@ public class GameActivity extends AppCompatActivity {
         populateMines();
     }
 
-
     private void initializeMines() {
         NUM_ROWS = options.getRow();
         NUM_COLUMNS = options.getCol();

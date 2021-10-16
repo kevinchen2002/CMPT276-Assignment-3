@@ -1,5 +1,9 @@
 package cmpt276.as3.mineseeker.model;
 
+/**
+ * CellInfo represents a single cell in the game. It tells if the cell has a mine, has been tapped,
+ * and if it had a mine at one point.
+ */
 public class CellInfo {
     private boolean hasActiveMine;
     private boolean wasMine;

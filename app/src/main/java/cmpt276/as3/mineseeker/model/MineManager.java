@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * MineManager handles the game logic. It randomly plants mines, checks mines, calculates nearby
+ * mines and keeps track of the state of the game. It also has a observer that will cause a CallBack
+ * whenever a mine is found.
+ */
 public class MineManager {
     CellInfo[][] mineCoordinates;
 
@@ -13,11 +18,9 @@ public class MineManager {
     private final int NUM_MINES;
 
     private int minesFound;
-
     private int minesChecked;
-    private static MineManager instance;
 
-    private List<MineScanObserver> observers = new ArrayList<>();
+    private final List<MineScanObserver> observers = new ArrayList<>();
 
     public void registerChangeCallBack(MineScanObserver obs) {
         observers.add(obs);
@@ -25,12 +28,6 @@ public class MineManager {
 
     public void deRegisterAllChangeCallBack() {
         observers.clear();
-    }
-
-    private void refreshScreen() {
-        for (MineScanObserver obs : observers) {
-            obs.gotCallBack();
-        }
     }
 
     public interface MineScanObserver {
@@ -50,7 +47,6 @@ public class MineManager {
                 row[i] = new CellInfo();
             }
         }
-
         plantMines();
     }
 
@@ -75,7 +71,6 @@ public class MineManager {
             refreshScreen();
             return true;
         }
-
 
         minesChecked++;
         currentCell.setTappedTrue();
@@ -126,4 +121,11 @@ public class MineManager {
     public boolean isGameWon() {
         return minesFound == NUM_MINES;
     }
+
+    private void refreshScreen() {
+        for (MineScanObserver obs : observers) {
+            obs.gotCallBack();
+        }
+    }
+
 }

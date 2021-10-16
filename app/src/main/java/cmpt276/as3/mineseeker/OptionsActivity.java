@@ -37,7 +37,6 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
         setContentView(R.layout.options_activity);
         sp = getSharedPreferences("MineSeeker", Context.MODE_PRIVATE);
 
-
         resetDataButton();
         boardSizeSpinner();
         numMinesSpinner();
@@ -51,7 +50,6 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
             Toast.makeText(getApplicationContext(),
                     "All data cleared.", Toast.LENGTH_LONG).show();
             Log.d("LOG", "it worked");
-            //TODO add a confirm fragment
         });
     }
 
@@ -59,11 +57,10 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
         return new Intent(context, OptionsActivity.class);
     }
 
-    /**
+    /*
      * Spinner functionality learned from https://bootstraphunter.com/how-to-add-a-dropdown-menu-in-android-studio/
      */
     void boardSizeSpinner() {
-        //TODO: see if font can be changed for this
         Spinner boardSizeSpinner = findViewById(R.id.boardSizeDropDown);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, options.getStringDimensions());
@@ -71,11 +68,10 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
         boardSizeSpinner.setAdapter(adapter);
 
         boardSizeSpinner.setSelection(options.getCurrentBoardOption());
-
         boardSizeSpinner.setOnItemSelectedListener(this);
     }
 
-    /**
+    /*
      * Spinner functionality learned from https://bootstraphunter.com/how-to-add-a-dropdown-menu-in-android-studio/
      */
     void numMinesSpinner() {
@@ -86,17 +82,19 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
         numMinesSpinner.setAdapter(adapter);
 
         numMinesSpinner.setSelection(options.getCurrentMineOption());
-
         numMinesSpinner.setOnItemSelectedListener(this);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        //Changing selected font and colour learned from stackoverflow.com/questions/15379851/change-text-color-of-selected-item-in-spinner
-        // and from https://stackoverflow.com/questions/52129212/spinner-with-custom-text-font-and-color
+        /*
+         * Changing selected font and colour learned from stackoverflow.com/questions/15379851/change-text-color-of-selected-item-in-spinner
+         * and from https://stackoverflow.com/questions/52129212/spinner-with-custom-text-font-and-color
+         */
         Typeface pokeFont = getResources().getFont(R.font.pokemon_font);
         ((TextView) parent.getSelectedView()).setTextColor(Color.BLACK);
         ((TextView) parent.getSelectedView()).setTypeface(pokeFont);
+
         int choice = parent.getSelectedItemPosition();
         if (parent.getId() == R.id.boardSizeDropDown) {
             options.setCurrentBoardOption(choice);
@@ -105,7 +103,6 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
            options.setCurrentMineOption(choice);
         }
     }
-
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {

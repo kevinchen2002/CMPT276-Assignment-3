@@ -1,13 +1,14 @@
 package cmpt276.as3.mineseeker.model;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
+/**
+ * GameData keeps track of all the scores of the games the player has played.
+ */
 public class GameData {
     private int gamesPlayed;
     private ArrayList<Integer> highScores = new ArrayList<>();
-    private OptionsManager options = OptionsManager.getInstance();
+    private final OptionsManager options = OptionsManager.getInstance();
     private final int BOARD_CONFIGS = options.getTotalDimensions();
     private final int MINE_CONFIGS = options.getTotalMineOptions();
 
@@ -62,11 +63,6 @@ public class GameData {
         } else {
             return -1;
         }
-        //return highScores.get(index);
-    }
-
-    public int getHighScore (int index) {
-        return highScores.get(index);
     }
 
     public ArrayList<Integer> getHighScores() {

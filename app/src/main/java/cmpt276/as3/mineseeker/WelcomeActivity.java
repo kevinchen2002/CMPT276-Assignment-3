@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
 /**
  * WelcomeActivity is the activity seen upon startup.
  * It plays a brief animation and continues when said animation is complete.
@@ -37,26 +36,24 @@ public class WelcomeActivity extends AppCompatActivity {
 
     void continueToMainButton() {
         Button btn = findViewById(R.id.welcome_button);
-        btn.setOnClickListener(v -> {
-            //TODO: make one function so the sound doesn't play twice
-            Intent launchMainMenu = MainMenuActivity.makeIntent(WelcomeActivity.this);
-            startActivity(launchMainMenu);
-            playAudio(R.raw.pokeball_pop);
-            timer.cancel();
-        });
+        btn.setOnClickListener(v -> launchToMainMenu());
     }
 
     void timedStart() {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                Intent launchMainMenu = MainMenuActivity.makeIntent(WelcomeActivity.this);
-                startActivity(launchMainMenu);
-                playAudio(R.raw.pokeball_pop);
-                timer.cancel();
+                launchToMainMenu();
             }
         };
         timer.schedule(timerTask, 9000, 18000);
+    }
+
+    void launchToMainMenu() {
+        Intent launchMainMenu = MainMenuActivity.makeIntent(WelcomeActivity.this);
+        startActivity(launchMainMenu);
+        playAudio(R.raw.pokeball_pop);
+        timer.cancel();
     }
 
     /**

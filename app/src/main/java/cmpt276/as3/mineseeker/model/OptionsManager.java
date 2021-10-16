@@ -3,9 +3,13 @@ package cmpt276.as3.mineseeker.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * OptionsManager stores all ways the game can be played. More configurations can be added by
+ * changing the constructor.
+ */
 public class OptionsManager {
-    private List<int[]> boardDimensions = new ArrayList<>();
-    private List<Integer> mineOptions = new ArrayList<>();
+    private final List<int[]> boardDimensions = new ArrayList<>();
+    private final List<Integer> mineOptions = new ArrayList<>();
 
     private int currentBoardOption = 0;
     private int currentMineOption = 0;
@@ -27,7 +31,6 @@ public class OptionsManager {
         if (instance == null) {
             instance = new OptionsManager();
         }
-
         return instance;
     }
 

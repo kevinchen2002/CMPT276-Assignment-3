@@ -14,7 +14,6 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -32,7 +31,9 @@ import cmpt276.as3.mineseeker.model.MineManager;
 import cmpt276.as3.mineseeker.model.OptionsManager;
 
 /**
- * TODO: [Josh insert stuff here]
+ * GameActivity manages all the gameplay of the app. It creates the buttons based on OptionsActivity
+ * and decorates them. It uses its private list of Pokemon to randomly show a Pokemon. The backbone
+ * is a MineManager.
  */
 public class GameActivity extends AppCompatActivity {
     private final GameData gameData = GameData.getInstance();
@@ -209,10 +210,8 @@ public class GameActivity extends AppCompatActivity {
                 gameMineManager.getNumMines()));
     }
 
-    /**
+    /*
      * All Pokemon sprites taken from https://pokemondb.net/sprites
-     * @param button the button (Pokemon) being pressed
-     * @param imageName the name of the Pokemon in question
      */
     private void scaleImageToButton (Button button, String imageName) {
         int scaleWidth = button.getWidth();
@@ -226,9 +225,8 @@ public class GameActivity extends AppCompatActivity {
         button.setBackground(new BitmapDrawable(resource, scaledBitmap));
     }
 
-    /**
+    /*
      * All Pokemon cries taken from https://play.pokemonshowdown.com/audio/cries/
-     * @param soundName the name of the Pokemon in question
      */
     private void playCry(String soundName) {
         int soundID = getResources().getIdentifier(soundName, "raw", GameActivity.this.getPackageName());
@@ -238,7 +236,6 @@ public class GameActivity extends AppCompatActivity {
 
     private String getRandomPokemon() {
         Random random = new Random();
-        Log.d("LIST SIZE", ""+pokemonList.size());
         int randomIndex = random.nextInt(pokemonList.size());
         return (String) pokemonList.get(randomIndex);
     }
@@ -260,9 +257,9 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void winGame() {
-        FragmentManager manager = getSupportFragmentManager();
         MediaPlayer mp = MediaPlayer.create(this, R.raw.win_sfx);
         mp.start();
+        FragmentManager manager = getSupportFragmentManager();
         WinMessageFragment winnerMessage = new WinMessageFragment();
         winnerMessage.show(manager, "You did it!");
     }

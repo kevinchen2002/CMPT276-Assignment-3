@@ -52,21 +52,17 @@ public class MainMenuActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     void updateText() {
-
-        TextView gamesPlayedView = findViewById(R.id.gamesPlayedView);
-        gamesPlayedView.setText("Games played: " + gameData.getGamesPlayed());
-
-        int boardSize = options.getCurrentBoardOption();
-        int mines = options.getCurrentMineOption();
         TextView boardConfigView = findViewById(R.id.boardConfigView);
         TextView mineNumView = findViewById(R.id.mineNumView);
+        TextView gamesPlayedView = findViewById(R.id.gamesPlayedView);
+        TextView highScoreView = findViewById(R.id.highScoreView);
 
-
+        gamesPlayedView.setText("Games played: " + gameData.getGamesPlayed());
         boardConfigView.setText("Field size: " + options.getStringCurrentDimensions());
         mineNumView.setText("Pokémon count: " + options.getStringCurrentMine());
 
-        TextView highScoreView = findViewById(R.id.highScoreView);
-
+        int boardSize = options.getCurrentBoardOption();
+        int mines = options.getCurrentMineOption();
         if (gameData.isThereScore(boardSize, mines)) {
             int highscore = gameData.getHighScore(boardSize, mines);
             highScoreView.setText("Best score for this configuration: " + highscore);

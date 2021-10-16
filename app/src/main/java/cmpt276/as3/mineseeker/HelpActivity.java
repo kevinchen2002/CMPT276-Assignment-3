@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-//TODO: make citations in strings with hyperlinks.
-
 /**
  * This activity includes a hyperlink to the assignment description and other information.
  */

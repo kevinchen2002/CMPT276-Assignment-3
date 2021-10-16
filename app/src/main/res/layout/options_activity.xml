@@ -10,45 +10,40 @@
         android:id="@+id/boardSizeDropDown"
         android:layout_width="280dp"
         android:layout_height="59dp"
-        android:layout_marginEnd="152dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="16dp"
         android:minHeight="48dp"
         android:popupBackground="@color/white"
         android:textSize="24sp"
         android:theme="@style/DropdownTheme"
-        app:layout_constraintBottom_toTopOf="@+id/numMinesDropDown"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/optionsTitle"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Spinner
         android:id="@+id/numMinesDropDown"
         android:layout_width="280dp"
         android:layout_height="59dp"
-        android:layout_marginEnd="152dp"
-        android:layout_marginBottom="108dp"
+        android:layout_marginTop="24dp"
         android:minHeight="48dp"
         android:popupBackground="@color/white"
         android:textSize="24sp"
         android:theme="@style/DropdownTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/boardSizeDropDown"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/numMinesLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/pokefont"
         android:text="@string/num_mines"
         android:textColor="@android:color/primary_text_light_nodisable"
-        android:fontFamily="@font/pokefont"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/numMinesDropDown"
-        app:layout_constraintEnd_toStartOf="@+id/numMinesDropDown"
-        app:layout_constraintHorizontal_bias="0.97"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="@+id/numMinesDropDown"
-        app:layout_constraintVertical_bias="0.375"
         tools:ignore="TextContrastCheck" />
 
     <TextView
@@ -68,16 +63,14 @@
         android:id="@+id/boardSizeLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/pokefont"
         android:text="@string/board_size"
         android:textColor="@android:color/primary_text_light_nodisable"
         android:textSize="20sp"
-        android:fontFamily="@font/pokefont"
         app:layout_constraintBottom_toBottomOf="@+id/boardSizeDropDown"
-        app:layout_constraintEnd_toStartOf="@+id/boardSizeDropDown"
-        app:layout_constraintHorizontal_bias="0.909"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/boardSizeDropDown"
-        app:layout_constraintVertical_bias="0.593" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/boardSizeDropDown" />
 
     <Button
         android:id="@+id/resetBtn"
@@ -91,5 +84,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="TextContrastCheck" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

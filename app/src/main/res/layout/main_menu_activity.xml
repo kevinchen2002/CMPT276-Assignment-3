@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,18 +14,20 @@
         android:fontFamily="@font/pokefont"
         android:text="@string/playBtn"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/main_to_help_btn"
+        app:layout_constraintHorizontal_bias="0.611"
+        app:layout_constraintStart_toEndOf="@+id/main_to_options_btn"
         app:layout_constraintTop_toBottomOf="@+id/highScoreView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.968" />
 
     <Button
         android:id="@+id/main_to_options_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="37dp"
         android:fontFamily="@font/pokefont"
         android:text="@string/optionsBtn"
+        app:layout_constraintBottom_toBottomOf="@+id/main_to_game_btn"
         app:layout_constraintEnd_toStartOf="@+id/main_to_game_btn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/main_to_game_btn" />
@@ -35,12 +36,14 @@
         android:id="@+id/main_to_help_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="70dp"
         android:fontFamily="@font/pokefont"
         android:text="@string/helpBtn"
+        app:layout_constraintBottom_toBottomOf="@+id/main_to_game_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/main_to_game_btn"
-        app:layout_constraintTop_toTopOf="@+id/main_to_game_btn" />
+        app:layout_constraintTop_toTopOf="@+id/main_to_game_btn"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/gamesPlayedView"

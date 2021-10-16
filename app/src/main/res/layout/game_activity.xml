@@ -28,9 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text=""
-        android:textColor="@android:color/primary_text_light_nodisable"
         android:fontFamily="@font/pokefont"
+        android:textColor="@android:color/primary_text_light_nodisable"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,10 +39,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text=""
-        android:textColor="@android:color/primary_text_light_nodisable"
         android:fontFamily="@font/pokefont"
+        android:textColor="@android:color/primary_text_light_nodisable"
         android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/gameBestScoreView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,11 +50,11 @@
         android:id="@+id/gameBestScoreView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="11dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/pokefont"
         android:text="@string/bestScoreView"
         android:textColor="@android:color/primary_text_light_nodisable"
-        android:fontFamily="@font/pokefont"
-        app:layout_constraintBottom_toTopOf="@+id/mine_table"
+        android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/showScansUsed"
         app:layout_constraintStart_toEndOf="@+id/showMinesFound"
         app:layout_constraintTop_toTopOf="parent" />

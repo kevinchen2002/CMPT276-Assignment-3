@@ -91,4 +91,10 @@ public class WelcomeActivity extends AppCompatActivity {
         MediaPlayer mp = MediaPlayer.create(this, id);
         mp.start();
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        timer.cancel();
+    }
 }

@@ -13,4 +13,16 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name = "DropdownTheme">
+        <item name= "android:textColor"> @android:color/primary_text_light_nodisable</item>
+        <item name="android:fontFamily"> @font/pokemon_font</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!--Learned from https://www.youtube.com/watch?v=I6Ns0pgNwZQ -->
+    <style name="TextAppearance.AppCompat.Widget.ActionBar.Title" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily"> @font/pokemon_font</item>
+    </style>
 </resources>

@@ -32,6 +32,5 @@ public class WinMessageFragment extends AppCompatDialogFragment {
         fragmentHeader.setTypeface(pokeFont);
 
         return winMessage;
-
     }
 }

@@ -1,6 +1,8 @@
 package cmpt276.as3.mineseeker;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,10 +33,15 @@ public class MainMenuActivity extends AppCompatActivity {
     private final OptionsManager options = OptionsManager.getInstance();
     SharedPreferences sp;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu_activity);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        }
 
         sp = getSharedPreferences("MineSeeker", Context.MODE_PRIVATE);
         loadGame();
@@ -120,6 +128,12 @@ public class MainMenuActivity extends AppCompatActivity {
 
         int gamesPlayed = sp.getInt("MineSeeker games played", 0);
         gameData.setGamesPlayed(gamesPlayed);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finishAffinity();
     }
 
     public static Intent makeIntent(Context context) {

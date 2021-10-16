@@ -28,6 +28,7 @@
         android:layout_marginBottom="8dp"
         android:background="@android:color/background_light"
         android:fontFamily="@font/pokefont"
+        android:lineSpacingExtra="4sp"
         android:text="@string/helpText"
         android:textColor="@android:color/primary_text_light_nodisable"
         android:textSize="12sp"

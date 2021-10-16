@@ -56,7 +56,7 @@ public class WelcomeActivity extends AppCompatActivity {
         timer.cancel();
     }
 
-    /**
+    /*
      * Animations learned from https://www.tutorialspoint.com/android/android_animations.htm
      */
     void clockwise(int id) {

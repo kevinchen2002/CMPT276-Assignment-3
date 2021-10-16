@@ -19,13 +19,15 @@
         you\'ll be able to scan how many there are in the same row and column. Use this tool to boost your
         Pokémon catching skills! You can change the field size and number of Pokémon in the options menu.
         You can also clear all data from the options menu. Good luck, trainer!
-
-        \n\n<a href="https://steamcommunity.com/sharedfiles/filedetails/?id=835140343">Sky background</a>
+        \n\nResources
+        \n<a href="https://steamcommunity.com/sharedfiles/filedetails/?id=835140343">Sky background</a>
         \n<a href="https://bulbapedia.bulbagarden.net/wiki/Professor_Oak">Oak portrait</a>
         \n<a href="https://www.deviantart.com/skatefilter5/art/Pokemon-Ground-600573792">Ground tiles</a>
         \n<a href="https://msikma.github.io/pokesprite/overview/inventory.html">Item sprites</a>
+        \n<a href="https://www.deviantart.com/rayquaza-dot/art/Pokemon-Platinum-Grass-Autotile-293299604">Grass sprites</a>
         \n<a href="https://pokemondb.net/sprites">Pokémon sprites</a>
         \n<a href="https://play.pokemonshowdown.com/audio/cries/">Pokémon cries</a>
+        \n<a href="https://downloads.khinsider.com/game-soundtracks/album/pokemon-sfx-gen-5-attack-moves-blk-wht-blk2-wht2">Grass sounds</a>
     </string>
     <string name="start_btn">START</string>
     <string name="gamesPlayedText">TextView</string>

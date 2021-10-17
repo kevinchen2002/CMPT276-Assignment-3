@@ -275,9 +275,14 @@ public class GameActivity extends AppCompatActivity {
 
     @Override
     public void finish() {
-        checkWinCondition();
-        gameMineManager.deRegisterAllChangeCallBack();
         super.finish();
+        checkWinCondition();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        gameMineManager.deRegisterAllChangeCallBack();
     }
 
     @Override

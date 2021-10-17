@@ -162,8 +162,8 @@ public class GameActivity extends AppCompatActivity {
 
     private void revealMine(int x, int y) {
         Button button = buttons[x][y];
-        updateMineCount();
         lockButtonSize();
+        updateMineCount();
         String pokemonName = getRandomPokemon();
         scaleImageToButton(button, pokemonName);
         playCry(pokemonName);

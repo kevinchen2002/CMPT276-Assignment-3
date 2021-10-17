@@ -42,9 +42,9 @@
     <string name="mineNumText">TextView</string>
     <string name="highScoreText">TextView</string>
     <string name="resetBtn">RESET DATA</string>
-    <string name="winMessage">You catched em\' all!</string>
+    <string name="winMessage">You catched \nem\' all!</string>
     <string name="win_dialog_description">A cool guy wearing sunglassse</string>
-    <string name="bestScoreView">No best score for this configuration!</string>
+    <string name="bestScoreView">No best score!</string>
     <string name="welcometurtwig">welcomeTurtwig</string>
     <string name="welcomehorsea">welcomeHorsea</string>
     <string name="welcomepokeball">welcomePokeball</string>

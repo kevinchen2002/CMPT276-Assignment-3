@@ -78,7 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
-        android:drawableStart="@drawable/ic_baseline_settings_backup_restore_24"
+        android:drawableLeft="@drawable/ic_baseline_settings_backup_restore_24"
         android:fontFamily="@font/pokefont"
         android:text="@string/resetBtn"
         android:textColor="@android:color/primary_text_dark"

@@ -78,9 +78,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
-        android:text="@string/resetBtn"
-        android:textColor="@android:color/primary_text_light_nodisable"
+        android:drawableStart="@drawable/ic_baseline_settings_backup_restore_24"
         android:fontFamily="@font/pokefont"
+        android:text="@string/resetBtn"
+        android:textColor="@android:color/primary_text_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="TextContrastCheck" />

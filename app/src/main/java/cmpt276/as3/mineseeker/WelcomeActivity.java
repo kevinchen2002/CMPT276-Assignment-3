@@ -56,9 +56,8 @@ public class WelcomeActivity extends AppCompatActivity {
         timer.cancel();
     }
 
-    /*
-     * Animations learned from https://www.tutorialspoint.com/android/android_animations.htm
-     */
+
+     // Animations learned from https://www.tutorialspoint.com/android/android_animations.htm
     void clockwise(int id) {
         ImageView image = findViewById(id);
         Animation clockwiseSpin =

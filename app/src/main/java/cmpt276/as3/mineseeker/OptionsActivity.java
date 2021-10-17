@@ -6,8 +6,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.transition.Slide;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -50,7 +48,6 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
             gameData.setGamesPlayed(0);
             Toast.makeText(getApplicationContext(),
                     "All data cleared.", Toast.LENGTH_LONG).show();
-            Log.d("LOG", "it worked");
         });
     }
 
@@ -58,9 +55,8 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
         return new Intent(context, OptionsActivity.class);
     }
 
-    /*
-     * Spinner functionality learned from https://bootstraphunter.com/how-to-add-a-dropdown-menu-in-android-studio/
-     */
+
+    // Spinner functionality learned from https://bootstraphunter.com/how-to-add-a-dropdown-menu-in-android-studio/
     void boardSizeSpinner() {
         Spinner boardSizeSpinner = findViewById(R.id.boardSizeDropDown);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
@@ -72,9 +68,6 @@ public class OptionsActivity extends AppCompatActivity implements AdapterView.On
         boardSizeSpinner.setOnItemSelectedListener(this);
     }
 
-    /*
-     * Spinner functionality learned from https://bootstraphunter.com/how-to-add-a-dropdown-menu-in-android-studio/
-     */
     void numMinesSpinner() {
         Spinner numMinesSpinner = findViewById(R.id.numMinesDropDown);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,

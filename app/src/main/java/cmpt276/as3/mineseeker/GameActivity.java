@@ -109,8 +109,6 @@ public class GameActivity extends AppCompatActivity {
                         1.0f
                         ));
 
-
-                //make clip on small buttons
                 button.setPadding(0,0,0,0);
 
                 button.setOnClickListener(v -> {
@@ -210,9 +208,8 @@ public class GameActivity extends AppCompatActivity {
                 gameMineManager.getNumMines()));
     }
 
-    /*
-     * All Pokemon sprites taken from https://pokemondb.net/sprites
-     */
+
+    //All Pokemon sprites taken from https://pokemondb.net/sprites
     private void scaleImageToButton (Button button, String imageName) {
         int scaleWidth = button.getWidth();
         int scaleHeight = button.getHeight();
@@ -225,9 +222,8 @@ public class GameActivity extends AppCompatActivity {
         button.setBackground(new BitmapDrawable(resource, scaledBitmap));
     }
 
-    /*
-     * All Pokemon cries taken from https://play.pokemonshowdown.com/audio/cries/
-     */
+
+     // All Pokemon cries taken from https://play.pokemonshowdown.com/audio/cries/
     private void playCry(String soundName) {
         int soundID = getResources().getIdentifier(soundName, "raw", GameActivity.this.getPackageName());
         MediaPlayer mp = MediaPlayer.create(this, soundID);

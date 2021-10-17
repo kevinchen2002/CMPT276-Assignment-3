@@ -1,16 +1,12 @@
 package cmpt276.as3.mineseeker;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -118,9 +114,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
     void loadGame() {
         Gson myGson = new GsonBuilder().create();
-
         String jsonHighScores = sp.getString("MineSeeker highscores", "");
-        Log.d("JSON", jsonHighScores);
         if (!jsonHighScores.equals("")) {
             Type listType = new TypeToken<ArrayList<Integer>>() {}.getType();
             gameData.setHighScores(myGson.fromJson(jsonHighScores, listType));
